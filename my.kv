@@ -2,7 +2,13 @@
 
 <CanvasWidget>
     rows: 2
-    canvas:
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    canvas.after:
         Color:
             rgba: C('#ff4d40')
         RoundedRectangle:
@@ -11,11 +17,14 @@
 
 
     Label:
-        text: "Type the name of the product:"
+        id: napis
+        text: "[color=808080]Type the name of the product:[/color]"
+        markup: True
         font_name: "Arial_Rounded_Bold"
         font_size: 65
         size: self.texture_size
         pos_hint: {"top": 1.1}
+
 
 
 
