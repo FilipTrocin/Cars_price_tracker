@@ -25,6 +25,6 @@ class CanvasWidget(BoxLayout):
     pass
 
 
-class MyApp(App):
+class AmazonPriceTrackerApp(App):
     def build(self):
         return CanvasWidget()
