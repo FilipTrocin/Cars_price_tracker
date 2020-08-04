@@ -1,0 +1,60 @@
+#: import C kivy.utils.get_color_from_hex
+
+<CanvasWidget>
+    orientation: 'vertical'
+    canvas:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        AnchorLayout:
+            anchor_x: 'center'
+            anchor_y: 'center'
+            Widget:
+                canvas:
+                    Color:
+                        rgba: C('#ff4d40')
+                    RoundedRectangle:
+                        size: (1000, 80)
+                        pos: (self.pos[1] - 70, self.pos[1] - 110)
+                        radius: [20, 20, 20, 20]
+                size_hint: None, None
+
+
+    FloatLayout:
+        Label:
+            text: "[color=808080]Type the name of the product:[/color]"
+            markup: True
+            font_name: "Arial_Rounded_Bold"
+            font_size: 65
+            pos_hint: {'x': 0, 'y': 0.9}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
