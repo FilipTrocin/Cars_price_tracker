@@ -3,9 +3,10 @@ import os
 from kivy.app import App
 from kivy.app import Widget
 from kivy.core.text import LabelBase
-from kivy.uix.floatlayout import FloatLayout
-import matplotlib.pyplot as plt
-import bottlenose as bt
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.textinput import TextInput
+from kivy.graphics import Color, Rectangle
+
 
 kivy.require('1.11.1')
 
@@ -20,16 +21,10 @@ LabelBase.register('Arial_Rounded_Bold', fn_regular=os.path.join(os.path.dirname
                                                                  'Font/Arial_Rounded_Bold.ttf'))
 
 
-class GraphicalApp(Widget):
+class CanvasWidget(BoxLayout):
     pass
-    # def __init__(self, **kwargs):
-    #     super(GraphicalApp, self).__init__(**kwargs)
-    #     self.size = (900, 70)
-    #     self.text_in = TextInput(multiline=False, font_name=os.path.join(os.path.dirname(__file__),
-    #                                                                      'Font/Arial_Rounded_Bold.ttf'))
-    #     self.add_widget(self.text_in)
 
 
-class Application(App):
+class MyApp(App):
     def build(self):
-        return FloatLayout()
+        return CanvasWidget()
