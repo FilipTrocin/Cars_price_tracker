@@ -1,6 +1,14 @@
 #: import C kivy.utils.get_color_from_hex
 
-<CanvasWidget>
+<PopupWindow>
+    FloatLayout:
+        Label:
+            text: "Nothing yet"
+            pos_hint: {"center_x": 1.3, "center_y": .6}
+
+
+
+<SearchPerformer>
     orientation: 'vertical'
     canvas:
         Color:
@@ -25,7 +33,8 @@
             background_color: C('#ff5722')
             border: (50, 50, 50, 50)
             multiline: False
-            on_text_validate: None
+            on_text_validate: root.hit_enter()
+
 
 
 
