@@ -36,14 +36,15 @@ def get_year():
 
 
 def get_mileage():
-    mileage = []
+    car_mileage = []
     div = soup.find_all('li', {'data-code': 'mileage'}, limit=None)
     for index, item in enumerate(div):
-        year = item.find('span')
-        content = year.contents
+        mileage = item.find('span')
+        content = mileage.contents
         processed = ''.join([x.replace(' ', '') for x in content]).replace('km', '')
-        mileage.append(int(processed))
-    return mileage
+        car_mileage.append(int(processed))
+    return car_mileage
+
 
 
 print(get_mileage())
