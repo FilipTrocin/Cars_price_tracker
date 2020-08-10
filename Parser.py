@@ -17,11 +17,11 @@ def get_connection(mode, link, file_name):
         cont = req.text
         file.write(cont)
 
-
 connection = get_connection('GET', 'https://suchen.mobile.de/fahrzeuge/search.html?dam=0&isSearchRequest=true&ms=23600;17&sfmr=false&vc=Car', "index.html" )
+file = 'index.html'
 
 
-# soup = bs4.BeautifulSoup()
-
+soup = bs4.BeautifulSoup(open(file), 'html.parser')
+print(soup)
 
 s.close()
