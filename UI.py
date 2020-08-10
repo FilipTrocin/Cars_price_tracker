@@ -29,6 +29,6 @@ class SearchPerformer(BoxLayout):
         popup_show()
 
 
-class AmazonPriceTrackerApp(App):
+class PriceTrackerUIApp(App):
     def build(self):
         return SearchPerformer()
