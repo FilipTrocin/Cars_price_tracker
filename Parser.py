@@ -17,11 +17,23 @@ def get_connection(mode, link, file_name):
         cont = req.text
         file.write(cont)
 
-connection = get_connection('GET', 'https://suchen.mobile.de/fahrzeuge/search.html?dam=0&isSearchRequest=true&ms=23600;17&sfmr=false&vc=Car', "index.html" )
+
+connection = get_connection('GET', 'https://www.otomoto.pl/osobowe/suzuki/samurai/', "index.html")
 file = 'index.html'
 
-
 soup = bs4.BeautifulSoup(open(file), 'html.parser')
-print(soup)
+
+
+def get_year():
+    car_year = []
+    div = soup.find_all('li', {'data-code': 'year'}, limit=None)
+    for index, item in enumerate(div):
+        year = item.find('span')
+        content = year.contents
+        processed = [x.strip() for x in content]
+        car_year.append(processed)
+    return car_year
+
+print(get_year())
 
 s.close()
