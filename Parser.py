@@ -34,6 +34,19 @@ def get_year():
         car_year.append(processed)
     return car_year
 
+
+def get_mileage():
+    mileage = []
+    div = soup.find_all('li', {'data-code': 'mileage'}, limit=None)
+    for index, item in enumerate(div):
+        year = item.find('span')
+        content = year.contents
+        processed = ''.join([x.replace(' ', '') for x in content]).replace('km', '')
+        mileage.append(int(processed))
+    return mileage
+
+
+print(get_mileage())
 print(get_year())
 
 s.close()
