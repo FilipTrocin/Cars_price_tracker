@@ -30,8 +30,8 @@ def get_year():
     for index, item in enumerate(div):
         year = item.find('span')
         content = year.contents
-        processed = [x.strip() for x in content]
-        car_year.append(processed)
+        processed = ''.join([x.strip() for x in content])
+        car_year.append(int(processed))
     return car_year
 
 
