@@ -5,4 +5,4 @@ import UI
 
 Window.size = (600, 150)
 
-UI.AmazonPriceTrackerApp().run()
+UI.PriceTrackerUIApp().run()
