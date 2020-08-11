@@ -12,7 +12,8 @@ def get_connection(mode, link, file_name):
     :return: established connection
     """
     with open(file_name, 'w') as file:
-        agent = {"User-Agent": 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.2 Safari/605.1.15'}
+        agent = {
+            "User-Agent": 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.2 Safari/605.1.15'}
         req = s.request(mode, link, stream=True, headers=agent)
         cont = req.text
         file.write(cont)
@@ -46,8 +47,25 @@ def get_mileage():
     return car_mileage
 
 
+def get_engine_capacity():
+    car_engine_capacity = []
+    params_block = soup.find_all('ul', {'class': 'ds-params-block'}, limit=None)
+    for li in params_block:
+        dt_exist = li.find('li', {'data-code': 'engine_capacity'})
+        if dt_exist:
+            engine_capacity = dt_exist.find('span')
+            content = engine_capacity.contents
+            processed = ''.join([x.replace(' ', '') for x in content]).replace('cm3', '')
+            car_engine_capacity.append(int(processed))
+        else:
+            car_engine_capacity.append(0)
+
+    return car_engine_capacity
+
 
 print(get_mileage())
 print(get_year())
+print(get_engine_capacity())
+
 
 s.close()
