@@ -26,6 +26,9 @@ soup = bs4.BeautifulSoup(open(file), 'html.parser')
 
 
 def get_year():
+    """
+    :return: list with car years made of all cars
+    """
     car_year = []
     div = soup.find_all('li', {'data-code': 'year'}, limit=None)
     for index, item in enumerate(div):
@@ -37,6 +40,9 @@ def get_year():
 
 
 def get_mileage():
+    """
+    :return: list with mileage of all cars
+    """
     car_mileage = []
     div = soup.find_all('li', {'data-code': 'mileage'}, limit=None)
     for index, item in enumerate(div):
@@ -48,6 +54,9 @@ def get_mileage():
 
 
 def get_engine_capacity():
+    """
+    :return: list of engine capacities of all cars. If user did not specify it, then it assigns 0 to that position
+    """
     car_engine_capacity = []
     params_block = soup.find_all('ul', {'class': 'ds-params-block'}, limit=None)
     for li in params_block:
@@ -63,9 +72,24 @@ def get_engine_capacity():
     return car_engine_capacity
 
 
+def get_fuel_type():
+    """
+    :return: list with type of fuel of all cars
+    """
+    car_fuel_type = []
+    div = soup.find_all('li', {'data-code': 'fuel_type'}, limit=None)
+    for index, item in enumerate(div):
+        fuel_type = item.find('span')
+        content = fuel_type.contents
+        processed = ''.join([x.replace(' ', '') for x in content])
+        car_fuel_type.append(processed)
+    return car_fuel_type
+
+
 print(get_mileage())
 print(get_year())
 print(get_engine_capacity())
+print(get_fuel_type())
 
 
 s.close()
