@@ -101,13 +101,13 @@ class Object():
         into MongoDB database
         :return:
         """
-        entry = [{'MAKE': {self.make}, 'MODEL': {self.model}, 'MILEAGE': {self.mileage}, 'YEAR': {self.year}, 'ENGINE':
-            {self.engine}, 'ENGINE_TYPE': {self.engine_type}}]
+        entry = [{'MAKE': self.make, 'MODEL': self.model, 'MILEAGE': self.mileage, 'YEAR': self.year,
+                  'ENGINE': self.engine, 'ENGINE_TYPE': self.engine_type}]
 
         return entry
 
 
-o1 = Object('Suzuki', 'samurai', 91000, 1997, 1900, 'Benzyna')
+o1 = Object('suzuki', 'samurai', 91000, 1997, 1900, 'Benzyna')
 print(o1.create_object())
 
 print(get_mileage())
