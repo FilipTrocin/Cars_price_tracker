@@ -18,7 +18,7 @@ def get_connection(mode, link, file_name):
         cont = req.text
         file.write(cont)
 
-
+# Here I can swap 'suzuki' and 'samurai' by any other car make and model. User will be able to decide
 connection = get_connection('GET', 'https://www.otomoto.pl/osobowe/suzuki/samurai/', "index.html")
 file = 'index.html'
 
@@ -84,6 +84,26 @@ def get_fuel_type():
         processed = ''.join([x.replace(' ', '') for x in content])
         car_fuel_type.append(processed)
     return car_fuel_type
+
+
+class Object():
+    def __init__(self, make, model, mileage, year, engine, engine_type):
+        self.make = make
+        self.model = model
+        self.mileage = mileage
+        self.year = year
+        self.engine = engine
+        self.engine_type = engine_type
+
+    def create_object(self):
+        """
+        Method producing objects - matching all of the parameters together, producing key-value object which can be inserted
+        into MongoDB database
+        :return:
+        """
+        entry = [{'MAKE': {self.make}, 'MODEL': {self.model}, 'MILEAGE': {self.mileage}, 'YEAR': {self.year}, 'ENGINE':
+            {self.engine}, 'ENGINE_TYPE': {self.engine_type}}]
+        pass
 
 
 print(get_mileage())
