@@ -117,12 +117,11 @@ class CarObject(object):
 
     def entry_model(self):
         """
-        Method producing objects - matching all of the parameters together, producing key-value object which can be
-        inserted into MongoDB database
-        :return:
+        Method declaring format in which CarObject instances data be send to MongoDB database
+        :return: list with specified format
         """
         entry_format = [{'MILEAGE': self.mileage, 'YEAR': self.year,
-                  'ENGINE': self.engine, 'ENGINE_TYPE': self.engine_type}]
+                         'ENGINE': self.engine, 'ENGINE_TYPE': self.engine_type}]
 
         return entry_format
 
