@@ -72,9 +72,9 @@ def get_engine_capacity():
     return car_engine_capacity
 
 
-def get_fuel_type():
+def get_engine_type():
     """
-    :return: list with type of fuel of all cars
+    :return: list with type of fuel of all cars - 'Benzyna' or 'Diesel' or 'Benzyna+LPG'
     """
     car_fuel_type = []
     div = soup.find_all('li', {'data-code': 'fuel_type'}, limit=None)
@@ -86,10 +86,16 @@ def get_fuel_type():
     return car_fuel_type
 
 
-class CarObject():
-    def __init__(self, make, model, mileage, year, engine, engine_type):
-        self.make = make
-        self.model = model
+def create_car_object():
+    global my_list
+    my_list = []
+    for _ in range(len(get_year())):
+        my_list.append(CarObject(get_mileage()[_], get_year()[_], get_engine_capacity()[_], get_engine_type()[_]))
+    return my_list
+
+
+class CarObject(object):
+    def __init__(self, mileage, year, engine, engine_type):
         self.mileage = mileage
         self.year = year
         self.engine = engine
@@ -97,24 +103,22 @@ class CarObject():
 
     def create_object(self):
         """
-        Method producing objects - matching all of the parameters together, producing key-value object which can be inserted
-        into MongoDB database
+        Method producing objects - matching all of the parameters together, producing key-value object which can be
+        inserted into MongoDB database
         :return:
         """
-        entry = [{'MAKE': self.make, 'MODEL': self.model, 'MILEAGE': self.mileage, 'YEAR': self.year,
+        entry = [{'MILEAGE': self.mileage, 'YEAR': self.year,
                   'ENGINE': self.engine, 'ENGINE_TYPE': self.engine_type}]
-
 
         return entry
 
 
-o1 = CarObject('suzuki', 'samurai', 91000, 1997, 1900, 'Benzyna')
-print(o1.create_object())
+# print(get_mileage())
+# print(get_year())
+# print(get_engine_capacity())
+# print(get_engine_type())
 
-print(get_mileage())
-print(get_year())
-print(get_engine_capacity())
-print(get_fuel_type())
+print(create_car_object())
 
 
 s.close()
