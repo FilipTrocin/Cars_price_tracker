@@ -3,6 +3,8 @@ import bs4
 
 s = requests.Session()
 
+my_list = []
+
 
 def get_connection(mode, link, file_name):
     """
@@ -87,11 +89,23 @@ def get_engine_type():
 
 
 def create_car_object():
+    """
+    Method producing CarObject instances by reading particular parameters from 'get' methods
+    :return:
+    """
     global my_list
-    my_list = []
     for _ in range(len(get_year())):
         my_list.append(CarObject(get_mileage()[_], get_year()[_], get_engine_capacity()[_], get_engine_type()[_]))
-    return my_list
+
+
+def create_entry():
+    """
+    Method printing all of the CarObject instances in a particular template
+    :return:
+    """
+    global my_list
+    for _ in range(0, len(my_list)):
+        print(my_list[_].entry_model())
 
 
 class CarObject(object):
@@ -101,24 +115,24 @@ class CarObject(object):
         self.engine = engine
         self.engine_type = engine_type
 
-    def create_object(self):
+    def entry_model(self):
         """
         Method producing objects - matching all of the parameters together, producing key-value object which can be
         inserted into MongoDB database
         :return:
         """
-        entry = [{'MILEAGE': self.mileage, 'YEAR': self.year,
+        entry_format = [{'MILEAGE': self.mileage, 'YEAR': self.year,
                   'ENGINE': self.engine, 'ENGINE_TYPE': self.engine_type}]
 
-        return entry
+        return entry_format
 
 
+create_car_object()
 # print(get_mileage())
 # print(get_year())
 # print(get_engine_capacity())
 # print(get_engine_type())
 
-print(create_car_object())
-
+create_entry()
 
 s.close()
