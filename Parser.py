@@ -37,7 +37,7 @@ def get_make():
         make = item.find('a')
         content = make.contents
         processed = ''.join([x.strip() for x in content])
-        splitted = processed.split()
+        splitted = processed.lower().split()
         car_make.append(splitted[0])
     return car_make
 
