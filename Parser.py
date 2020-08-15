@@ -114,7 +114,7 @@ def get_engine_type():
         fuel_type = item.find('span')
         content = fuel_type.contents
         processed = ''.join([x.replace(' ', '') for x in content])
-        car_fuel_type.append(processed)
+        car_fuel_type.append(processed.lower())
     return car_fuel_type
 
 
