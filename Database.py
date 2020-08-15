@@ -13,5 +13,5 @@ db = client.CarDatabase
 collection = db.CarDatabase
 
 # inserting object to database, adding _id automatically
-# new = collection.insert_one(post).inserted_id
+# new = collection.insert_many(post)
 
