@@ -3,7 +3,7 @@ import bs4
 
 s = requests.Session()
 
-my_list = []
+temp = []
 
 
 def get_connection(mode, link, file_name):
@@ -93,9 +93,9 @@ def create_car_object():
     Method producing CarObject instances by reading particular parameters from 'get' methods
     :return:
     """
-    global my_list
+    global temp
     for _ in range(len(get_year())):
-        my_list.append(CarObject(get_mileage()[_], get_year()[_], get_engine_capacity()[_], get_engine_type()[_]))
+        temp.append(CarObject(get_mileage()[_], get_year()[_], get_engine_capacity()[_], get_engine_type()[_]))
 
 
 def create_entry():
@@ -103,9 +103,11 @@ def create_entry():
     Method printing all of the CarObject instances in a particular template
     :return:
     """
-    global my_list
-    for _ in range(0, len(my_list)):
-        print(my_list[_].entry_model())
+    cars_lst = []
+    global temp
+    for _ in range(0, len(temp)):
+        cars_lst.extend(temp[_].entry_model())
+    return cars_lst
 
 
 class CarObject(object):
@@ -132,6 +134,6 @@ create_car_object()
 # print(get_engine_capacity())
 # print(get_engine_type())
 
-create_entry()
+print(create_entry())
 
 s.close()
