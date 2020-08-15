@@ -42,6 +42,21 @@ def get_make():
     return car_make
 
 
+def get_model():
+    """
+    :return: list with car models of all cars
+    """
+    car_model = []
+    h2 = soup.find_all('h2', {'class': 'offer-title ds-title'}, limit=None)
+    for index, item in enumerate(h2):
+        make = item.find('a')
+        content = make.contents
+        processed = ''.join([x.strip() for x in content])
+        splitted = processed.lower().split()
+        car_model.append(splitted[1])
+    return car_model
+
+
 def get_year():
     """
     :return: list with car years of all cars
@@ -146,6 +161,7 @@ class CarObject(object):
 
 create_car_object()
 # print(get_make())
+# print(get_model())
 # print(get_mileage())
 # print(get_year())
 # print(get_engine_capacity())
