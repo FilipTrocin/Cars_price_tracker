@@ -118,6 +118,20 @@ def get_engine_type():
     return car_fuel_type
 
 
+def get_price():
+    """
+    :return: list with price of all cars
+    """
+    car_price = []
+    div = soup.find_all('div', {'class': 'price-wrapper-listing'}, limit=None)
+    for index, item in enumerate(div):
+        fuel_type = item.find('span')
+        content = fuel_type.contents
+        processed = ''.join([x.replace(' ', '') for x in content[1]])
+        car_price.append(int(processed))
+    return car_price
+
+
 def create_car_object():
     """
     Method producing CarObject instances by reading particular parameters from 'get' methods
@@ -168,6 +182,7 @@ create_car_object()
 # print(get_year())
 # print(get_engine_capacity())
 # print(get_engine_type())
+# print(get_price())
 
 print(create_entry())
 
