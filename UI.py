@@ -20,7 +20,7 @@ class PopupWindow(FloatLayout):
 def popup_show():
     pop = PopupWindow()
 
-    pop_win = Popup(title="Analysis", content=pop, size_hint=(None, None), size=(500, 500))
+    pop_win = Popup(title="Analysis", content=pop, size_hint=(None, None), size=(1600, 800))
     pop_win.open()
 
 
