@@ -27,9 +27,24 @@ file = 'index.html'
 soup = bs4.BeautifulSoup(open(file), 'html.parser')
 
 
+def get_make():
+    """
+    :return: list with car makes of all cars
+    """
+    car_make = []
+    h2 = soup.find_all('h2', {'class': 'offer-title ds-title'}, limit=None)
+    for index, item in enumerate(h2):
+        make = item.find('a')
+        content = make.contents
+        processed = ''.join([x.strip() for x in content])
+        splitted = processed.split()
+        car_make.append(splitted[0])
+    return car_make
+
+
 def get_year():
     """
-    :return: list with car years made of all cars
+    :return: list with car years of all cars
     """
     car_year = []
     div = soup.find_all('li', {'data-code': 'year'}, limit=None)
@@ -129,6 +144,7 @@ class CarObject(object):
 
 
 create_car_object()
+# print(get_make())
 # print(get_mileage())
 # print(get_year())
 # print(get_engine_capacity())
