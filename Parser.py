@@ -125,7 +125,8 @@ def create_car_object():
     """
     global temp
     for _ in range(len(get_year())):
-        temp.append(CarObject(get_make()[_], get_mileage()[_], get_year()[_], get_engine_capacity()[_], get_engine_type()[_]))
+        temp.append(CarObject(get_make()[_], get_model()[_],
+                              get_mileage()[_], get_year()[_], get_engine_capacity()[_], get_engine_type()[_]))
 
 
 def create_entry():
@@ -141,8 +142,9 @@ def create_entry():
 
 
 class CarObject(object):
-    def __init__(self, make, mileage, year, engine, engine_type):
+    def __init__(self, make, model, mileage, year, engine, engine_type):
         self.make = make
+        self.model = model
         self.mileage = mileage
         self.year = year
         self.engine = engine
@@ -153,7 +155,7 @@ class CarObject(object):
         Method declaring format in which CarObject instances data be send to MongoDB database
         :return: list with specified format
         """
-        entry_format = [{'MAKE': self.make, 'MILEAGE': self.mileage, 'YEAR': self.year,
+        entry_format = [{'MAKE': self.make, 'MODEL': self.model, 'MILEAGE': self.mileage, 'YEAR': self.year,
                          'ENGINE': self.engine, 'ENGINE_TYPE': self.engine_type}]
 
         return entry_format
