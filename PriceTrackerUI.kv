@@ -2,38 +2,102 @@
 
 <PopupWindow>
     FloatLayout:
-        Label:
-            text: "Nothing yet"
-            pos_hint: {"center_x": 1.3, "center_y": .6}
-
+        pos_hint: {"x": .8, "y": .5}
+    Label:
+        text: "Tu będzie wykres"
+        pos: self.pos
 
 
 <SearchPerformer>
-    orientation: 'vertical'
-    canvas:
-        Color:
-            rgba: 1, 1, 1, 1
-        Rectangle:
-            pos: self.pos
-            size: self.size
+    GridLayout:
+        size: root.size
+        cols: 2
+        rows: 2
 
-    FloatLayout:
-        Label:
-            id: text_lab
-            text: "[color=808080]Type the name of the product:[/color]"
-            markup: True
-            font_name: "Arial_Rounded_Bold"
-            font_size: 70
-            pos_hint: {'top': 1.2}
+        BoxLayout:
+            orientation: 'vertical'
+            rows: 2
+            cols: 1
+            Label:
+                text: "CAR MAKE"
+                markup: True
+                font_name: "Arial_Rounded_Bold"
+                font_size: 60
+                text_size: self.size
+                valign: 'bottom'
+                halign: 'center'
 
-        TextInput:
-            pos: 120, 50
-            size_hint: (.8, .2)
-            font_size: 30
-            background_color: C('#ff5722')
-            border: (50, 50, 50, 50)
-            multiline: False
-            on_text_validate: root.hit_enter()
+            FloatLayout:
+                TextInput:
+                    border: (50, 50, 50, 50)
+                    multiline: False
+                    font_size: 30
+                    size_hint: .8, .5
+                    pos_hint: {"x": 0.1, "y": 0.5}
+                    on_text_validate: root.hit_enter()
+
+        BoxLayout:
+            orientation: 'vertical'
+            rows: 2
+            cols: 1
+            Label:
+                text: "CAR MODEL"
+                markup: True
+                font_name: "Arial_Rounded_Bold"
+                font_size: 60
+                text_size: self.size
+                valign: 'bottom'
+                halign: 'center'
+            FloatLayout:
+                TextInput:
+                    border: (50, 50, 50, 50)
+                    multiline: False
+                    font_size: 30
+                    pos_hint: {"x": 0.1, "y": 0.5}
+                    size_hint: .8, .5
+
+        BoxLayout:
+            orientation: 'vertical'
+            rows: 2
+            cols: 1
+            Label:
+                text: "CAR YEAR"
+                markup: True
+                font_name: "Arial_Rounded_Bold"
+                font_size: 60
+                text_size: self.size
+                valign: 'bottom'
+                halign: 'center'
+
+            FloatLayout:
+                TextInput:
+                    border: (50, 50, 50, 50)
+                    multiline: False
+                    font_size: 30
+                    pos_hint: {"x": 0.1, "y": 0.5}
+                    size_hint: .8, .5
+
+        BoxLayout:
+            orientation: 'vertical'
+            rows: 2
+            cols: 1
+            Label:
+                text: "CAR ENGINE"
+                markup: True
+                font_name: "Arial_Rounded_Bold"
+                font_size: 60
+                text_size: self.size
+                valign: 'bottom'
+                halign: 'center'
+
+            FloatLayout:
+                TextInput:
+                    border: (50, 50, 50, 50)
+                    multiline: False
+                    font_size: 30
+                    pos_hint: {"x": 0.1, "y": 0.5}
+                    size_hint: .8, .5
+
 
 
 
