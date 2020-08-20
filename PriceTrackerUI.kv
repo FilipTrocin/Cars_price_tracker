@@ -1,11 +1,13 @@
 #: import C kivy.utils.get_color_from_hex
 
 <PopupWindow>
-    FloatLayout:
-        pos_hint: {"x": .8, "y": .5}
-    Label:
-        text: "Tu będzie wykres"
-        pos: self.pos
+    BoxLayout:
+        orientation: 'vertical'
+        cols: 2
+
+        Label:
+            text: "Tu będzie wykres"
+
 
 
 <SearchPerformer>
