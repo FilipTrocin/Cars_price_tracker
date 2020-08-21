@@ -29,7 +29,8 @@ class SearchPerformer(BoxLayout):
         popup_show()
 
     def input_grabber(self):
-        print(self.ids.crmk.text)
+        specs = [self.ids.crmk.text, self.ids.crmd.text, self.ids.cryr.text, self.ids.crentp.text]
+        return specs
 
 
 class PriceTrackerUIApp(App):
