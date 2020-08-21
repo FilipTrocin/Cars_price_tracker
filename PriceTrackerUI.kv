@@ -9,12 +9,19 @@
             text: "Tu będzie wykres"
 
 
+<SmoothInput@TextInput>
+    TextInput:
+        multiline: False
+        font_size: 30
+        border: 50, 50, 50, 50
+
+
 
 <SearchPerformer>
     GridLayout:
         size: root.size
         cols: 2
-        rows: 2
+        rows: 3
 
         BoxLayout:
             orientation: 'vertical'
@@ -30,13 +37,11 @@
                 halign: 'center'
 
             FloatLayout:
-                TextInput:
-                    border: (50, 50, 50, 50)
+                SmoothInput:
                     multiline: False
-                    font_size: 30
                     size_hint: .8, .5
                     pos_hint: {"x": 0.1, "y": 0.5}
-                    on_text_validate: root.hit_enter()
+                    write_tab: False
 
         BoxLayout:
             orientation: 'vertical'
@@ -50,13 +55,13 @@
                 text_size: self.size
                 valign: 'bottom'
                 halign: 'center'
+                
             FloatLayout:
-                TextInput:
-                    border: (50, 50, 50, 50)
+                SmoothInput:
                     multiline: False
-                    font_size: 30
-                    pos_hint: {"x": 0.1, "y": 0.5}
                     size_hint: .8, .5
+                    pos_hint: {"x": 0.1, "y": 0.5}
+                    write_tab: False
 
         BoxLayout:
             orientation: 'vertical'
@@ -72,12 +77,11 @@
                 halign: 'center'
 
             FloatLayout:
-                TextInput:
-                    border: (50, 50, 50, 50)
+                SmoothInput:
                     multiline: False
-                    font_size: 30
-                    pos_hint: {"x": 0.1, "y": 0.5}
                     size_hint: .8, .5
+                    pos_hint: {"x": 0.1, "y": 0.5}
+                    write_tab: False
 
         BoxLayout:
             orientation: 'vertical'
@@ -93,37 +97,14 @@
                 halign: 'center'
 
             FloatLayout:
-                TextInput:
-                    border: (50, 50, 50, 50)
+                SmoothInput:
                     multiline: False
-                    font_size: 30
-                    pos_hint: {"x": 0.1, "y": 0.5}
                     size_hint: .8, .5
+                    pos_hint: {"x": 0.1, "y": 0.5}
+                    write_tab: False
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        FloatLayout:
+            Button:
+                text: 'Search'
+                size_hint: .5, .4
+                pos_hint: {"x": .75, "top": .9}
