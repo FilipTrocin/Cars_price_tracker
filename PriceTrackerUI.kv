@@ -38,10 +38,12 @@
 
             FloatLayout:
                 SmoothInput:
+                    id: crmk
                     multiline: False
                     size_hint: .8, .5
                     pos_hint: {"x": 0.1, "y": 0.5}
                     write_tab: False
+                    on_text_validate: root.input_grabber()
 
         BoxLayout:
             orientation: 'vertical'
@@ -108,4 +110,5 @@
                 text: 'Search'
                 size_hint: .5, .4
                 pos_hint: {"x": .75, "top": .9}
+                border: 20, 20, 20, 20
                 on_release: root.hit_enter()
