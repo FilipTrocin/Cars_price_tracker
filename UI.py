@@ -28,6 +28,9 @@ class SearchPerformer(BoxLayout):
     def hit_enter(self):
         popup_show()
 
+    def input_grabber(self):
+        print(self.ids.crmk.text)
+
 
 class PriceTrackerUIApp(App):
     def build(self):
