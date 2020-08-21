@@ -43,7 +43,6 @@
                     size_hint: .8, .5
                     pos_hint: {"x": 0.1, "y": 0.5}
                     write_tab: False
-                    on_text_validate: root.input_grabber()
 
         BoxLayout:
             orientation: 'vertical'
@@ -60,6 +59,7 @@
 
             FloatLayout:
                 SmoothInput:
+                    id: crmd
                     multiline: False
                     size_hint: .8, .5
                     pos_hint: {"x": 0.1, "y": 0.5}
@@ -80,6 +80,7 @@
 
             FloatLayout:
                 SmoothInput:
+                    id: cryr
                     multiline: False
                     size_hint: .8, .5
                     pos_hint: {"x": 0.1, "y": 0.5}
@@ -90,7 +91,7 @@
             rows: 2
             cols: 1
             Label:
-                text: "CAR ENGINE"
+                text: "CAR ENGINE TYPE"
                 markup: True
                 font_name: "Arial_Rounded_Bold"
                 font_size: 60
@@ -100,6 +101,7 @@
 
             FloatLayout:
                 SmoothInput:
+                    id: crentp
                     multiline: False
                     size_hint: .8, .5
                     pos_hint: {"x": 0.1, "y": 0.5}
@@ -111,4 +113,5 @@
                 size_hint: .5, .4
                 pos_hint: {"x": .75, "top": .9}
                 border: 20, 20, 20, 20
-                on_release: root.hit_enter()
+                # on_release: root.hit_enter()
+                on_release: root.input_grabber()
