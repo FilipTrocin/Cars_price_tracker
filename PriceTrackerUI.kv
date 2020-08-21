@@ -55,7 +55,7 @@
                 text_size: self.size
                 valign: 'bottom'
                 halign: 'center'
-                
+
             FloatLayout:
                 SmoothInput:
                     multiline: False
@@ -108,3 +108,4 @@
                 text: 'Search'
                 size_hint: .5, .4
                 pos_hint: {"x": .75, "top": .9}
+                on_release: root.hit_enter()
