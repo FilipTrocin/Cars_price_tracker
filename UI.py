@@ -1,5 +1,6 @@
-import kivy
 import os
+import kivy
+import Database
 from kivy.app import App
 from kivy.core.text import LabelBase
 from kivy.uix.boxlayout import BoxLayout
@@ -11,6 +12,8 @@ kivy.require('1.11.1')
 # Font for Label
 LabelBase.register('Arial_Rounded_Bold', fn_regular=os.path.join(os.path.dirname(__file__),
                                                                  'Font/Arial_Rounded_Bold.ttf'))
+
+user_search_list = []
 
 
 class PopupWindow(FloatLayout):
@@ -25,14 +28,19 @@ def popup_show():
 
 
 class SearchPerformer(BoxLayout):
+
     def hit_enter(self):
         popup_show()
 
     def input_grabber(self):
         specs = [self.ids.crmk.text, self.ids.crmd.text, self.ids.cryr.text, self.ids.crentp.text]
-        return specs
+        user_search_list.extend(specs)
+        database = Database
+        database.print_grabber()
+        user_search_list.clear()
 
 
 class PriceTrackerUIApp(App):
     def build(self):
         return SearchPerformer()
+
