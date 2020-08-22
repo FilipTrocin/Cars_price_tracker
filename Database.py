@@ -1,17 +1,23 @@
 import pymongo
-import pprint
+import UI
 
 # Connection to the database
 from bson import ObjectId
 
-client = pymongo.MongoClient('localhost', 27017)
 
-# Accessing database
-db = client.CarDatabase
+def establish_connection():
+    client = pymongo.MongoClient('localhost', 27017)
 
-# Getting collection
-collection = db.CarDatabase
+    # Accessing database
+    db = client.CarDatabase
 
-# inserting object to database, adding _id automatically
-# new = collection.insert_many(post)
+    # Getting collection
+    collection = db.CarDatabase
 
+    # inserting object to database, adding _id automatically
+    # new = collection.insert_many(post)
+
+
+# Temporary function to checking is data from UI.global_list is transfered to Database.py
+def print_grabber():
+    print('Hello Database!: ', UI.user_search_list)
