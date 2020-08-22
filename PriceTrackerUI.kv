@@ -112,5 +112,9 @@
                 size_hint: .5, .4
                 pos_hint: {"x": .75, "top": .9}
                 border: 20, 20, 20, 20
-                # on_release: root.hit_enter()
-                on_release: root.input_grabber()
+                on_press: root.input_grabber()
+                on_release: root.hit_enter()
+                on_release: crentp.text = ""
+                on_release: cryr.text = ""
+                on_release: crmd.text = ""
+                on_release: crmk.text = ""
