@@ -28,14 +28,14 @@ def popup_show():
 
 
 class SearchPerformer(BoxLayout):
-
     def hit_enter(self):
         popup_show()
 
     def input_grabber(self):
         specs = [self.ids.crmk.text, self.ids.crmd.text, self.ids.cryr.text, self.ids.crentp.text]
         trimmed = [item.strip() for item in specs]
-        user_search_list.extend(trimmed)
+        lowered = [item.lower() for item in trimmed]
+        user_search_list.extend(lowered)
         database = Database
         database.print_grabber()
         user_search_list.clear()
