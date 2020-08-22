@@ -34,7 +34,8 @@ class SearchPerformer(BoxLayout):
 
     def input_grabber(self):
         specs = [self.ids.crmk.text, self.ids.crmd.text, self.ids.cryr.text, self.ids.crentp.text]
-        user_search_list.extend(specs)
+        trimmed = [item.strip() for item in specs]
+        user_search_list.extend(trimmed)
         database = Database
         database.print_grabber()
         user_search_list.clear()
