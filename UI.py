@@ -40,6 +40,12 @@ class SearchPerformer(BoxLayout):
         database.print_grabber()
         user_search_list.clear()
 
+    def clear(self):
+        self.ids.crmk.text = ""
+        self.ids.crmd.text = ""
+        self.ids.cryr.text = ""
+        self.ids.crentp.text = ""
+
 
 class PriceTrackerUIApp(App):
     def build(self):
