@@ -1,5 +1,6 @@
 import requests
 import bs4
+from multiprocessing import Pipe, Process
 
 s = requests.Session()
 
@@ -138,9 +139,9 @@ def create_car_object():
     :return:
     """
     global temp
-    for _ in range(len(get_year())):
-        temp.append(CarObject(get_make()[_], get_model()[_], get_mileage()[_], get_year()[_], get_engine_capacity()[_],
-                              get_engine_type()[_], get_price()[_]))
+    for index in range(len(get_year())):
+        temp.append(CarObject(get_make()[index], get_model()[index], get_mileage()[index], get_year()[index], get_engine_capacity()[index],
+                              get_engine_type()[index], get_price()[index]))
 
 
 def create_entry():
@@ -150,8 +151,8 @@ def create_entry():
     """
     cars_lst = []
     global temp
-    for _ in range(0, len(temp)):
-        cars_lst.extend(temp[_].entry_model())
+    for index in range(0, len(temp)):
+        cars_lst.extend(temp[index].entry_model())
     return cars_lst
 
 
@@ -176,15 +177,16 @@ class CarObject(object):
         return entry_format
 
 
+def create_entry_sender(child_conn):
+    """
+    Function initialising create_entry method and sending it's results to
+    :param child_conn: results of create_entry method to be send
+    :return:
+    """
+    results = create_entry()
+    child_conn.send(results)
+    child_conn.close()
+
+
 create_car_object()
-# print(get_make())
-# print(get_model())
-# print(get_mileage())
-# print(get_year())
-# print(get_engine_capacity())
-# print(get_engine_type())
-# print(get_price())
-
-print(create_entry())
-
 s.close()
