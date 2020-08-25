@@ -38,6 +38,7 @@ class SearchPerformer(BoxLayout):
         user_search_list.extend(lowered)
         database = Database
         database.print_grabber()
+        database.create_entry_receiver()  # testing - method is printing results from the web every time
         user_search_list.clear()
 
     def clear(self):
