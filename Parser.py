@@ -1,13 +1,12 @@
 import requests
 import bs4
-from multiprocessing import Pipe, Process
 
 s = requests.Session()
 
 temp = []
 
 
-def get_connection(mode, link, file_name):
+def get_connection(mode, file_name, made, model):
     """
     :param file_name:
     :param mode: mode for which you want to make a request
@@ -15,17 +14,22 @@ def get_connection(mode, link, file_name):
     :return: established connection
     """
     with open(file_name, 'w') as file:
+        website = 'https://www.otomoto.pl/osobowe/{}/{}/'
         agent = {
             "User-Agent": 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.2 Safari/605.1.15'}
-        req = s.request(mode, link, stream=True, headers=agent)
+        req = s.request(mode, website.format(made, model), stream=True, headers=agent)
         cont = req.text
         file.write(cont)
 
-# Here I can swap 'suzuki' and 'samurai' by any other car make and model. User will be able to decide
-connection = get_connection('GET', 'https://www.otomoto.pl/osobowe/suzuki/samurai/', "index.html")
-file = 'index.html'
 
-soup = bs4.BeautifulSoup(open(file), 'html.parser')
+def parse_html(made, model):
+    # Here I can swap 'suzuki' and 'samurai' by any other car make and model. User will be able to decide
+    get_connection('GET', 'index.html', made, model)
+    file = 'index.html'
+    return bs4.BeautifulSoup(open(file), 'html.parser')
+
+
+soup = parse_html('suzuki', 'samurai')
 
 
 def get_make():
@@ -140,7 +144,8 @@ def create_car_object():
     """
     global temp
     for index in range(len(get_year())):
-        temp.append(CarObject(get_make()[index], get_model()[index], get_mileage()[index], get_year()[index], get_engine_capacity()[index],
+        temp.append(CarObject(get_make()[index], get_model()[index], get_mileage()[index], get_year()[index],
+                              get_engine_capacity()[index],
                               get_engine_type()[index], get_price()[index]))
 
 
