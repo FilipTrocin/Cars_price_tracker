@@ -39,6 +39,7 @@ class SearchPerformer(BoxLayout):
         lowered = [item.lower() for item in trimmed]
         user_search_list.extend(lowered)
         database.print_grabber()
+        database.create_entry_receiver()  # testing - must be called after print_grabber
         user_search_list.clear()
 
     def clear(self):
@@ -46,8 +47,6 @@ class SearchPerformer(BoxLayout):
         self.ids.crmd.text = ""
         self.ids.cryr.text = ""
         self.ids.crentp.text = ""
-
-    dt.create_entry_receiver()  # testing - method is printing results from the web every time
 
 
 class PriceTrackerUIApp(App):
