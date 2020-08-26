@@ -194,5 +194,12 @@ def create_entry_sender(child_conn):
     child_conn.close()
 
 
+def has_changed():
+    if user_search_list[0] == temp[0].make and user_search_list[1] == temp[0].model:
+        return True
+    else:
+        return False
+
+
 create_car_object()
 s.close()
