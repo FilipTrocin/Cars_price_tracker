@@ -33,7 +33,10 @@ def create_entry_receiver():
     method
     """
     import parser
+    if parser.has_changed() is False:
+        parser = reload(parser)
+
     parent_conn, child_conn = Pipe()
     p = Process(target=parser.create_entry_sender, args=(child_conn,))
     p.start()
-    print(parent_conn.recv())  # [{'MAKE': 'ford', 'MODEL': 'mondeo', 'MILEAGE': 178909, 'YEAR': 2007, ...
+    print(parent_conn.recv())
