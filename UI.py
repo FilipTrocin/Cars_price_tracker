@@ -1,6 +1,6 @@
 import os
 import kivy
-import Database
+import database
 from kivy.app import App
 from kivy.core.text import LabelBase
 from kivy.uix.boxlayout import BoxLayout
@@ -28,7 +28,7 @@ def popup_show():
 
 
 class SearchPerformer(BoxLayout):
-    dt = Database
+    dt = database
 
     def hit_enter(self):
         popup_show()
@@ -52,4 +52,5 @@ class SearchPerformer(BoxLayout):
 class PriceTrackerUIApp(App):
     def build(self):
         return SearchPerformer()
+
 

@@ -1,6 +1,7 @@
 import pymongo
 import UI
 from multiprocessing import Pipe, Process
+from importlib import reload
 
 
 def establish_connection():
@@ -16,7 +17,7 @@ def establish_connection():
     # new = collection.insert_many(post)
 
 
-# Temporary function to checking is data from UI.global_list is transferred to Database.py
+# Temporary function to checking is data from UI.global_list is transferred to database.py
 def print_grabber():
     """
     ULTIMATELY - queering by this data from database
@@ -27,12 +28,12 @@ def print_grabber():
 
 def create_entry_receiver():
     """
-    :return: function receiving results of create_entry_sender method from Parser.py, initialising process with that
+    :return: function receiving results of create_entry_sender method from parser.py, initialising process with that
     ULTIMATELY - imputing this data to database
     method
     """
-    import Parser
+    import parser
     parent_conn, child_conn = Pipe()
-    p = Process(target=Parser.create_entry_sender, args=(child_conn,))
+    p = Process(target=parser.create_entry_sender, args=(child_conn,))
     p.start()
     print(parent_conn.recv())  # [{'MAKE': 'ford', 'MODEL': 'mondeo', 'MILEAGE': 178909, 'YEAR': 2007, ...
