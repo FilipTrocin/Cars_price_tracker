@@ -1,5 +1,6 @@
 import requests
 import bs4
+from UI import user_search_list
 
 s = requests.Session()
 
@@ -23,13 +24,13 @@ def get_connection(mode, file_name, made, model):
 
 
 def parse_html(made, model):
-    # Here I can swap 'suzuki' and 'samurai' by any other car make and model. User will be able to decide
     get_connection('GET', 'index.html', made, model)
     file = 'index.html'
     return bs4.BeautifulSoup(open(file), 'html.parser')
 
 
-soup = parse_html('suzuki', 'samurai')
+# Here I can swap 'suzuki' and 'samurai' by any other car make and model. User will be able to decide
+soup = parse_html(user_search_list[0], user_search_list[1])
 
 
 def get_make():
