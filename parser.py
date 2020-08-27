@@ -134,6 +134,8 @@ def get_price():
         fuel_type = item.find('span')
         content = fuel_type.contents
         processed = ''.join([x.replace(' ', '') for x in content[1]])
+        if "," in processed:
+            processed = processed.split(",", 1)[0]
         car_price.append(int(processed))
     return car_price
 
