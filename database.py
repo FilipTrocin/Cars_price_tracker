@@ -23,7 +23,7 @@ def print_grabber():
     ULTIMATELY - queering by this data from database
     :return:
     """
-    print('Hello Database!: ', UI.user_search_list)
+    print('Hello Database!: ', UI.user_input)
 
 
 def create_entry_receiver():
@@ -33,10 +33,15 @@ def create_entry_receiver():
     method
     """
     import parser
-    if parser.has_changed() is False:
-        parser = reload(parser)
+    reload(parser)
+    empty = []
 
     parent_conn, child_conn = Pipe()
     p = Process(target=parser.create_entry_sender, args=(child_conn,))
     p.start()
-    print(parent_conn.recv())
+    empty.extend(parent_conn.recv())
+
+    if not empty:
+        print("Car you're looking for doesn't exist in our database")
+    else:
+        print(empty)
