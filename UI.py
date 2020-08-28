@@ -34,7 +34,7 @@ class SearchPerformer(BoxLayout):
         popup_show()
 
     def input_grabber(self, database):
-        specs = [self.ids.crmk.text, self.ids.crmd.text, self.ids.cryr.text, self.ids.crentp.text]
+        specs = [self.ids.crmk.text, self.ids.crmd.text, self.ids.cryr.text, self.ids.crft.text]
         trimmed = [item.strip() for item in specs]
         lowered = [item.lower() for item in trimmed]
         user_input.extend(lowered)
@@ -46,7 +46,7 @@ class SearchPerformer(BoxLayout):
         self.ids.crmk.text = ""
         self.ids.crmd.text = ""
         self.ids.cryr.text = ""
-        self.ids.crentp.text = ""
+        self.ids.crft.text = ""
 
 
 class PriceTrackerUIApp(App):

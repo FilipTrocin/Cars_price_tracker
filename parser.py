@@ -110,7 +110,7 @@ def get_engine_capacity():
     return car_engine_capacity
 
 
-def get_engine_type():
+def get_fuel_type():
     """
     :return: list with type of fuel of all cars - 'Benzyna' or 'Diesel' or 'Benzyna+LPG'
     """
@@ -149,7 +149,7 @@ def create_car_object():
     for index in range(len(get_year())):
         web_results.append(CarObject(get_make()[index], get_model()[index], get_mileage()[index], get_year()[index],
                                      get_engine_capacity()[index],
-                                     get_engine_type()[index], get_price()[index]))
+                                     get_fuel_type()[index], get_price()[index]))
 
 
 def create_entry():
@@ -171,7 +171,7 @@ class CarObject(object):
         self.mileage = mileage
         self.year = year
         self.engine = engine
-        self.engine_type = engine_type
+        self.fuel_type = engine_type
         self.price = price
 
     def entry_model(self):
@@ -180,7 +180,7 @@ class CarObject(object):
         :return: list with specified format
         """
         entry_format = [{'MAKE': self.make, 'MODEL': self.model, 'MILEAGE': self.mileage, 'YEAR': self.year,
-                         'ENGINE': self.engine, 'ENGINE_TYPE': self.engine_type, 'PRICE': self.price}]
+                         'ENGINE': self.engine, 'ENGINE_TYPE': self.fuel_type, 'PRICE': self.price}]
 
         return entry_format
 
