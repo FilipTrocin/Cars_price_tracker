@@ -1,10 +1,10 @@
 import requests
 import bs4
-from UI import user_search_list
+from UI import user_input
 
 s = requests.Session()
 
-temp = []
+web_results = []
 
 
 def get_connection(mode, file_name, made, model):
@@ -30,7 +30,7 @@ def parse_html(made, model):
 
 
 # Here I can swap 'suzuki' and 'samurai' by any other car make and model. User will be able to decide
-soup = parse_html(user_search_list[0], user_search_list[1])
+soup = parse_html(user_input[0], user_input[1])
 
 
 def get_make():
@@ -145,11 +145,11 @@ def create_car_object():
     Method producing CarObject instances by reading particular parameters from 'get' methods
     :return:
     """
-    global temp
+    global web_results
     for index in range(len(get_year())):
-        temp.append(CarObject(get_make()[index], get_model()[index], get_mileage()[index], get_year()[index],
-                              get_engine_capacity()[index],
-                              get_engine_type()[index], get_price()[index]))
+        web_results.append(CarObject(get_make()[index], get_model()[index], get_mileage()[index], get_year()[index],
+                                     get_engine_capacity()[index],
+                                     get_engine_type()[index], get_price()[index]))
 
 
 def create_entry():
@@ -158,9 +158,9 @@ def create_entry():
     :return:
     """
     cars_lst = []
-    global temp
-    for index in range(0, len(temp)):
-        cars_lst.extend(temp[index].entry_model())
+    global web_results
+    for index in range(0, len(web_results)):
+        cars_lst.extend(web_results[index].entry_model())
     return cars_lst
 
 
@@ -194,13 +194,6 @@ def create_entry_sender(child_conn):
     results = create_entry()
     child_conn.send(results)
     child_conn.close()
-
-
-def has_changed():
-    if user_search_list[0] == temp[0].make and user_search_list[1] == temp[0].model:
-        return True
-    else:
-        return False
 
 
 create_car_object()
