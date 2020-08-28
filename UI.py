@@ -13,7 +13,7 @@ kivy.require('1.11.1')
 LabelBase.register('Arial_Rounded_Bold', fn_regular=os.path.join(os.path.dirname(__file__),
                                                                  'Font/Arial_Rounded_Bold.ttf'))
 
-user_search_list = []
+user_input = []
 
 
 class PopupWindow(FloatLayout):
@@ -37,10 +37,10 @@ class SearchPerformer(BoxLayout):
         specs = [self.ids.crmk.text, self.ids.crmd.text, self.ids.cryr.text, self.ids.crentp.text]
         trimmed = [item.strip() for item in specs]
         lowered = [item.lower() for item in trimmed]
-        user_search_list.extend(lowered)
+        user_input.extend(lowered)
         database.print_grabber()
         database.create_entry_receiver()  # testing - must be called after print_grabber
-        user_search_list.clear()
+        user_input.clear()
 
     def clear(self):
         self.ids.crmk.text = ""
