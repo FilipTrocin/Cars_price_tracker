@@ -1,6 +1,8 @@
 import requests
 import bs4
 from UI import user_input
+import datetime
+import time
 
 s = requests.Session()
 
@@ -146,10 +148,11 @@ def create_car_object():
     :return:
     """
     global web_results
+    today = datetime.date(time.localtime().tm_year, time.localtime().tm_mon, time.localtime().tm_mday).isoformat()
     for index in range(len(get_year())):
         web_results.append(CarObject(get_make()[index], get_model()[index], get_mileage()[index], get_year()[index],
                                      get_engine_capacity()[index],
-                                     get_fuel_type()[index], get_price()[index]))
+                                     get_fuel_type()[index], get_price()[index], today))
 
 
 def create_entry():
@@ -165,7 +168,7 @@ def create_entry():
 
 
 class CarObject(object):
-    def __init__(self, make, model, mileage, year, engine, engine_type, price):
+    def __init__(self, make, model, mileage, year, engine, engine_type, price, search_time):
         self.make = make
         self.model = model
         self.mileage = mileage
@@ -173,6 +176,7 @@ class CarObject(object):
         self.engine = engine
         self.fuel_type = engine_type
         self.price = price
+        self.search_time = search_time
 
     def entry_model(self):
         """
@@ -180,7 +184,8 @@ class CarObject(object):
         :return: list with specified format
         """
         entry_format = [{'MAKE': self.make, 'MODEL': self.model, 'MILEAGE': self.mileage, 'YEAR': self.year,
-                         'ENGINE': self.engine, 'ENGINE_TYPE': self.fuel_type, 'PRICE': self.price}]
+                         'ENGINE': self.engine, 'ENGINE_TYPE': self.fuel_type, 'PRICE': self.price,
+                         'SEARCH_TIME': self.search_time}]
 
         return entry_format
 
