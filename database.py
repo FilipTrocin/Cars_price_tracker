@@ -13,17 +13,28 @@ def establish_connection():
     # Getting collection
     collection = db.CarDatabase
 
-    # inserting object to database, adding _id automatically
-    # new = collection.insert_many(post)
+    return collection
 
 
-# Temporary function to checking is data from UI.global_list is transferred to database.py
-def print_grabber():
+def searched_today():
     """
-    ULTIMATELY - queering by this data from database
+    Method checking if search for particular car model was done in current day.
+    :return:
+    """
+    pass
+
+
+def query_database():
+    """
+    Method returning results from database according to make and model which user specified
     :return:
     """
     print('Hello Database!: ', UI.user_input)
+    user_search = UI.user_input
+    criteria = establish_connection().find({"MAKE": user_search[0], "MODEL": user_search[1]})
+
+    for post in criteria:
+        print(post)
 
 
 def create_entry_receiver():
