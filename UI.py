@@ -38,7 +38,7 @@ class SearchPerformer(BoxLayout):
         trimmed = [item.strip() for item in specs]
         lowered = [item.lower() for item in trimmed]
         user_input.extend(lowered)
-        database.print_grabber()
+        database.query_database()
         database.create_entry_receiver()  # testing - must be called after print_grabber
         user_input.clear()
 
