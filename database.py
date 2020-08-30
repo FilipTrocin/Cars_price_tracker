@@ -26,10 +26,8 @@ def searched_today():
     """
     from UI import user_input
     if establish_connection().find_one({"MAKE": user_input[0], "MODEL": user_input[1], "SEARCH_TIME": today}) is not None:
-        # print(True)
         return True
     else:
-        # print(False)
         return False
 
 
@@ -39,7 +37,7 @@ def add_to_database():
     :return:
     """
     if searched_today() is True:
-        pass
+        print('Search for this car model was already done today')
     else:
         establish_connection().insert_many(create_entry_receiver())
 
@@ -50,7 +48,6 @@ def query_database():
     :return:
     """
     from UI import user_input
-    searched_today()
     print('Hello Database!: ', user_input)
     criteria = establish_connection().find({"MAKE": user_input[0], "MODEL": user_input[1]})
 
