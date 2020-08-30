@@ -1,7 +1,10 @@
 import pymongo
-import UI
 from multiprocessing import Pipe, Process
 from importlib import reload
+from datetime import date
+import time
+
+today = date(time.localtime().tm_year, time.localtime().tm_mon, time.localtime().tm_mday).isoformat()
 
 
 def establish_connection():
@@ -21,7 +24,24 @@ def searched_today():
     Method checking if search for particular car model was done in current day.
     :return:
     """
-    pass
+    from UI import user_input
+    if establish_connection().find_one({"MAKE": user_input[0], "MODEL": user_input[1], "SEARCH_TIME": today}) is not None:
+        # print(True)
+        return True
+    else:
+        # print(False)
+        return False
+
+
+def add_to_database():
+    """
+    Method adding web results for particular car models
+    :return:
+    """
+    if searched_today() is True:
+        pass
+    else:
+        establish_connection().insert_many(create_entry_receiver())
 
 
 def query_database():
@@ -29,9 +49,10 @@ def query_database():
     Method returning results from database according to make and model which user specified
     :return:
     """
-    print('Hello Database!: ', UI.user_input)
-    user_search = UI.user_input
-    criteria = establish_connection().find({"MAKE": user_search[0], "MODEL": user_search[1]})
+    from UI import user_input
+    searched_today()
+    print('Hello Database!: ', user_input)
+    criteria = establish_connection().find({"MAKE": user_input[0], "MODEL": user_input[1]})
 
     for post in criteria:
         print(post)
@@ -55,4 +76,4 @@ def create_entry_receiver():
     if not empty:
         print("Car you're looking for doesn't exist in our database")
     else:
-        print(empty)
+        return empty
