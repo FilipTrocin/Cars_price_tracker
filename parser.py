@@ -1,11 +1,11 @@
 import requests
 import bs4
-from UI import user_input
-import datetime
+from datetime import date
 import time
-
+from UI import user_input
 s = requests.Session()
 
+today = date(time.localtime().tm_year, time.localtime().tm_mon, time.localtime().tm_mday).isoformat()
 web_results = []
 
 
@@ -148,7 +148,6 @@ def create_car_object():
     :return:
     """
     global web_results
-    today = datetime.date(time.localtime().tm_year, time.localtime().tm_mon, time.localtime().tm_mday).isoformat()
     for index in range(len(get_year())):
         web_results.append(CarObject(get_make()[index], get_model()[index], get_mileage()[index], get_year()[index],
                                      get_engine_capacity()[index],
