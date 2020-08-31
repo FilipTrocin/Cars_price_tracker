@@ -167,7 +167,7 @@ def create_entry():
 
 
 class CarObject(object):
-    def __init__(self, make, model, mileage, year, engine, engine_type, price, search_time):
+    def __init__(self, make, model, mileage, year, engine, engine_type, price, first_search):
         self.make = make
         self.model = model
         self.mileage = mileage
@@ -175,7 +175,7 @@ class CarObject(object):
         self.engine = engine
         self.fuel_type = engine_type
         self.price = price
-        self.search_time = search_time
+        self.first_search = first_search
 
     def entry_model(self):
         """
@@ -184,7 +184,7 @@ class CarObject(object):
         """
         entry_format = [{'MAKE': self.make, 'MODEL': self.model, 'MILEAGE': self.mileage, 'YEAR': self.year,
                          'ENGINE': self.engine, 'ENGINE_TYPE': self.fuel_type, 'PRICE': self.price,
-                         'SEARCH_TIME': self.search_time}]
+                         'FIRST_SEARCH': self.first_search}]
 
         return entry_format
 
