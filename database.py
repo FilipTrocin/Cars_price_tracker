@@ -50,6 +50,7 @@ def query_database():
     from UI import user_input
     import calculations
     reload(calculations)
+    calculations.average()
     print('Hello Database!: ', user_input, '\n')
 
     # criteria = establish_connection().find({"MAKE": user_input[0], "MODEL": user_input[1]})
