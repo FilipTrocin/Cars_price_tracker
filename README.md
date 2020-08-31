@@ -1,0 +1,1 @@
+Note, algorithm loads results from the first page only from otomoto.pl website 
