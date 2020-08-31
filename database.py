@@ -25,7 +25,7 @@ def searched_today():
     :return:
     """
     from UI import user_input
-    if establish_connection().find_one({"MAKE": user_input[0], "MODEL": user_input[1], "SEARCH_TIME": today}) is not None:
+    if establish_connection().find_one({"MAKE": user_input[0], "MODEL": user_input[1], "FIRST_SEARCH": today}) is not None:
         return True
     else:
         return False
@@ -48,11 +48,13 @@ def query_database():
     :return:
     """
     from UI import user_input
-    print('Hello Database!: ', user_input)
-    criteria = establish_connection().find({"MAKE": user_input[0], "MODEL": user_input[1]})
+    import calculations
+    reload(calculations)
+    print('Hello Database!: ', user_input, '\n')
 
-    for post in criteria:
-        print(post)
+    # criteria = establish_connection().find({"MAKE": user_input[0], "MODEL": user_input[1]})
+    # for post in criteria:
+    #     print(post)
 
 
 def create_entry_receiver():
