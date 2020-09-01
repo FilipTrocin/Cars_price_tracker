@@ -1,7 +1,10 @@
 import matplotlib.pyplot as plt
+from calculations import dates_present, avg_daily_price
 
 
-plt.bar()
-plt.xlabel('DATE')
-plt.ylabel('PRICE')
-plt.show()
+def plot_bar_show():
+    plt.style.use('classic')
+    plt.bar(dates_present, avg_daily_price)
+    plt.xlabel('DATE')
+    plt.ylabel('PRICE')
+    plt.show()
