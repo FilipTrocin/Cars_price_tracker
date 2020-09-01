@@ -78,3 +78,12 @@ def create_entry_receiver():
         print("Car you're looking for doesn't exist in our database")
     else:
         return empty
+
+
+def run_plot():
+    """
+    execution of plot_bar_show method
+    :return:
+    """
+    import plot
+    plot.plot_bar_show()
