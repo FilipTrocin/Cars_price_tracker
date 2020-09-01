@@ -40,6 +40,7 @@ class SearchPerformer(BoxLayout):
         user_input.extend(lowered)
         database.add_to_database()
         database.query_database()
+        database.run_plot()
         user_input.clear()
 
     def clear(self):
