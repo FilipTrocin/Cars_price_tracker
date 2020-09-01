@@ -53,6 +53,7 @@ def query_database():
     calculations.average()
     print('Hello Database!: ', user_input, '\n')
 
+    # TESTING - Printing all of the cars existing in a database (in respect to make and model user specified)
     # criteria = establish_connection().find({"MAKE": user_input[0], "MODEL": user_input[1]})
     # for post in criteria:
     #     print(post)
