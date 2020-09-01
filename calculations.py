@@ -28,11 +28,20 @@ def average():
     # print(daily_prices, '\n')
     count = 0
     for x in daily_prices:
-        avg = sum(x)/len(x)
-        print(f'On day {dates[count]} car with that specification cost on average {round(avg, 2)}PLN')
-        count += 1
-
-    flatten = [item for items in daily_prices for item in items]
-    overall_avg = sum(flatten)/len(flatten)
-    print(f"Based on the past and current data the average price for car with that specification is: {round(overall_avg, 2)}PLN")
-
+        condition = [item for items in daily_prices for item in items]
+        if not condition:
+            print('We do not have such a car in our database')
+            break
+        try:
+            avg = sum(x) / len(x)
+            print(f'On day {dates[count]} car with that specification cost on average {round(avg, 2)}PLN')
+            count += 1
+        except ZeroDivisionError:
+            pass
+    try:
+        flatten = [item for items in daily_prices for item in items]
+        overall_avg = sum(flatten) / len(flatten)
+        print(
+            f"Based on the past and current data the average price for car with that specification is: {round(overall_avg, 2)}PLN")
+    except ZeroDivisionError:
+        pass
