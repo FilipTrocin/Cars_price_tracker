@@ -4,8 +4,8 @@ from UI import user_input
 connection = establish_connection()
 
 dates = connection.distinct('FIRST_SEARCH')
-daily_prices = []
 dates_present = []
+avg_daily_price = []
 
 
 def average():
@@ -15,6 +15,7 @@ def average():
     on the website on that day
     :return:
     """
+    daily_prices = []
     cars = []
     for x, y in enumerate(dates):
         cars.extend(connection.find(
@@ -41,6 +42,7 @@ def average():
             break
         try:
             avg = sum(x) / len(x)
+            avg_daily_price.append(avg)
             print(f'• On day {dates[count]} car with that specification cost on average {round(avg, 2)}PLN')
             count += 1
         except ZeroDivisionError:
