@@ -4,6 +4,8 @@ from UI import user_input
 connection = establish_connection()
 
 dates = connection.distinct('FIRST_SEARCH')
+daily_prices = []
+dates_present = []
 
 
 def average():
@@ -13,12 +15,15 @@ def average():
     on the website on that day
     :return:
     """
-    daily_prices = []
     cars = []
     for x, y in enumerate(dates):
         cars.extend(connection.find(
             {"MAKE": user_input[0], "MODEL": user_input[1], "YEAR": int(user_input[2]), "ENGINE_TYPE": user_input[3],
              "FIRST_SEARCH": dates[x]}))
+
+    for date in cars:
+        if date['FIRST_SEARCH'] not in dates_present:
+            dates_present.append(date['FIRST_SEARCH'])
 
     for x in dates:
         temp = []
@@ -47,3 +52,4 @@ def average():
             f"Based on the past and current data the average price for car with that specification is: {round(overall_avg, 2)}PLN")
     except ZeroDivisionError:
         pass
+
