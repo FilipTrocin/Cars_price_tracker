@@ -8,7 +8,9 @@ dates = connection.distinct('FIRST_SEARCH')
 
 def average():
     """
-    Function counting an average price of that car with that specification user specified in UI
+    Function counting an average price of the car with that specification user specified in UI. It shows you prices
+    of car with that specification from each particular day, only when the script was running or if the car existed
+    on the website on that day
     :return:
     """
     daily_prices = []
@@ -34,7 +36,7 @@ def average():
             break
         try:
             avg = sum(x) / len(x)
-            print(f'On day {dates[count]} car with that specification cost on average {round(avg, 2)}PLN')
+            print(f'• On day {dates[count]} car with that specification cost on average {round(avg, 2)}PLN')
             count += 1
         except ZeroDivisionError:
             pass
