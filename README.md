@@ -1,4 +1,6 @@
-Note, algorithm loads results from the first page only from otomoto.pl website
+Note, algorithm loads results of given car make and model from the first search page only.
+Loading from each search page feature may be added in the next versions of the program.
+ 
 
 ## Requirements:
 have installed the following packages:
