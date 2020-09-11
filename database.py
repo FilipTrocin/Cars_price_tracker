@@ -60,6 +60,13 @@ def query_database():
     #     print(post)
 
 
+def show_unique_dates():
+    """Method returning unique dates in which the algorithm was running"""
+    unique = establish_connection().distinct("FIRST_SEARCH")
+    unique = [x.split('-') for x in unique]
+    return unique
+
+
 def create_entry_receiver():
     """
     :return: function receiving results of create_entry_sender method from parser.py, initialising process with that
