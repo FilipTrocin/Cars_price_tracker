@@ -62,9 +62,15 @@ def query_database():
 
 def show_unique_dates():
     """Method returning unique dates in which the algorithm was running"""
+    dates = []
     unique = establish_connection().distinct("FIRST_SEARCH")
     unique = [x.split('-') for x in unique]
-    return unique
+    for date in unique:
+        temp = []
+        for num in date:
+            temp.append(int(num))
+        dates.append(temp)
+    return dates
 
 
 def create_entry_receiver():
