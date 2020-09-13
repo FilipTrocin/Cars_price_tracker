@@ -61,7 +61,7 @@ def query_database():
 
 
 def show_unique_dates():
-    """Method returning unique dates in which the algorithm was running"""
+    """Method returning unique dates in which the algorithm was running, downloading data by a particular car model"""
     dates = []
     unique = establish_connection().distinct("FIRST_SEARCH")
     unique = [x.split('-') for x in unique]
