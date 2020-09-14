@@ -57,3 +57,25 @@ def average():
     except ZeroDivisionError:
         pass
 
+
+def average_weekly():
+    """
+    Method counting average of all of the car prices from the week
+    :return:
+    """
+    all_dates = []
+    unique_dates = []
+    for date in show_unique_dates():
+        temp = [date[0], date[1]]
+        all_dates.append(temp)
+    for x in all_dates:
+        if x not in unique_dates:
+            unique_dates.append(x)
+
+    cal = calendar.Calendar()
+    for month in unique_dates:
+        print(cal.monthdayscalendar(month[0], month[1]))  # FIX: To make numbers symbolise particular day of the month
+
+
+def to_dates():
+    pass
