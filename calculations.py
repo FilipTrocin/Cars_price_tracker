@@ -64,18 +64,18 @@ def average_weekly():
     :return:
     """
     all_dates = []
-    unique_dates = []
+    year_month = []  # date in [year, month] format where year and month is unique
     for date in show_unique_dates():
         temp = [date[0], date[1]]
         all_dates.append(temp)
     for x in all_dates:
-        if x not in unique_dates:
-            unique_dates.append(x)
+        if x not in year_month:
+            year_month.append(x)
 
     cal = calendar.Calendar()
-    for month in unique_dates:
-        print(cal.monthdayscalendar(month[0], month[1]))  # FIX: To make numbers symbolise particular day of the month
+    for date in year_month:
+        print(cal.monthdayscalendar(date[0], date[1]))  # FIX: To make numbers symbolise particular day of the month
 
 
-def to_dates():
+def to_dates(month):
     pass
