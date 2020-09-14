@@ -1,11 +1,12 @@
-from database import establish_connection
+from database import establish_connection, show_unique_dates
 from UI import user_input
+import calendar
 
 connection = establish_connection()
 
 dates = connection.distinct('FIRST_SEARCH')
-dates_present = []
-avg_daily_price = []
+dates_present = []  # dates in which car with that specification is present in database
+avg_daily_price = []  # Average of daily prices
 
 
 def average():
@@ -15,7 +16,8 @@ def average():
     on the website on that day
     :return:
     """
-    daily_prices = []
+    daily_prices = []  # Prices of all the cars with concrete user's specification, present in database
+    # List of all cars matching user's criteria and existing in a database in concrete dates the algorithm was running
     cars = []
     for x, y in enumerate(dates):
         cars.extend(connection.find(
