@@ -1,6 +1,8 @@
 from database import establish_connection, show_unique_dates
 from UI import user_input
 import calendar
+import time
+from datetime import date
 
 connection = establish_connection()
 
@@ -45,7 +47,7 @@ def average():
         try:
             avg = sum(x) / len(x)
             avg_daily_price.append(avg)
-            print(f'• On day {dates[count]} car with that specification cost on average {round(avg, 2)}PLN')
+            print(f'• On day {dates_present[count]} car with that specification cost on average {round(avg, 2)}PLN')
             count += 1
         except ZeroDivisionError:
             pass
