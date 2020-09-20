@@ -1,8 +1,6 @@
 from database import establish_connection, show_unique_dates
 from UI import user_input
 import calendar
-import time
-from datetime import date
 
 connection = establish_connection()
 
@@ -10,6 +8,7 @@ dates = connection.distinct('FIRST_SEARCH')
 dates_present = []  # dates in which car with that specification is present in database
 avg_daily_price = []  # Average of daily prices
 year_month = []  # date in [[year, month]] format where year and month is unique
+cars = []  # Findings based of user input
 
 
 def average_day():
@@ -21,7 +20,6 @@ def average_day():
     """
     daily_prices = []  # Prices of all the cars with concrete user's specification, present in database
     # List of all cars matching user's criteria and existing in a database in concrete dates the algorithm was running
-    cars = []
     for x, y in enumerate(dates):
         cars.extend(connection.find(
             {"MAKE": user_input[0], "MODEL": user_input[1], "YEAR": int(user_input[2]), "ENGINE_TYPE": user_input[3],
