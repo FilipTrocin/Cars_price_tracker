@@ -51,6 +51,7 @@ def query_database():
     import calculations
     reload(calculations)
     calculations.average()
+    calculations.average_weekly()
     print('Hello Database!: ', user_input, '\n')
 
     # TESTING - Printing all of the cars existing in a database (in respect to make and model user specified)
