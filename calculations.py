@@ -9,6 +9,7 @@ connection = establish_connection()
 dates = connection.distinct('FIRST_SEARCH')
 dates_present = []  # dates in which car with that specification is present in database
 avg_daily_price = []  # Average of daily prices
+year_month = []  # date in [[year, month]] format where year and month is unique
 
 
 def average():
@@ -66,7 +67,6 @@ def average_weekly():
     :return:
     """
     all_dates = []
-    year_month = []  # date in [year, month] format where year and month is unique
     for date in show_unique_dates():
         temp = [date[0], date[1]]
         all_dates.append(temp)
@@ -79,5 +79,16 @@ def average_weekly():
         print(cal.monthdayscalendar(date[0], date[1]))  # FIX: To make numbers symbolise particular day of the month
 
 
-def to_dates(month):
-    pass
+def to_dates(calendar, month, year):
+    """
+    :param month: instance of cal.monthdayscalendar(year, month)
+    :return:
+    """
+    month_dates = []
+    for week in calendar:
+        week_dates = []
+        for day in week:
+            if day is not 0:
+                week_dates.append('{}-{}-{}'.format(year, month, day))
+        month_dates.append(week_dates)
+    print(month_dates)
