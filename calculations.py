@@ -81,7 +81,9 @@ def average_weekly():
 
 def to_dates(calendar, month, year):
     """
-    :param month: instance of cal.monthdayscalendar(year, month)
+    :param year: year
+    :param calendar: instance of cal.monthdayscalendar()
+    :param month: month
     :return:
     """
     month_dates = []
