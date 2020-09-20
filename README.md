@@ -5,7 +5,6 @@ Loading from each search page feature may be added in the next versions of the p
 ## Requirements:
 have installed the following packages:
 * beautifulsoup4==4.9.1
-* bottlenose==1.1.8
 * certifi==2020.6.20
 * chardet==3.0.4
 * Kivy==1.11.1
