@@ -50,7 +50,7 @@ def query_database():
     from UI import user_input
     import calculations
     reload(calculations)
-    calculations.average()
+    calculations.average_day()
     calculations.average_weekly()
     print('Hello Database!: ', user_input, '\n')
 
