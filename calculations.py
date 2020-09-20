@@ -76,7 +76,7 @@ def average_weekly():
 
     cal = calendar.Calendar()
     for date in year_month:
-        print(cal.monthdayscalendar(date[0], date[1]))  # FIX: To make numbers symbolise particular day of the month
+        to_dates(cal.monthdayscalendar(date[0], date[1]), date[1], date[0])
 
 
 def to_dates(calendar, month, year):
