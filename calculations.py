@@ -12,7 +12,7 @@ avg_daily_price = []  # Average of daily prices
 year_month = []  # date in [[year, month]] format where year and month is unique
 
 
-def average():
+def average_day():
     """
     Function counting an average price of the car with that specification user specified in UI. It shows you prices
     of car with that specification from each particular day, only when the script was running or if the car existed
