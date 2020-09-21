@@ -4,10 +4,10 @@ import calendar
 
 connection = establish_connection()
 
-dates = connection.distinct('FIRST_SEARCH')
+dates = connection.distinct('SEARCHES')
 dates_present = []  # dates in which car with that specification is present in database
 avg_daily_price = []  # Average of daily prices
-year_month = []  # date in [[year, month]] format where year and month is unique
+year_month = []  # date in [[year, month]] format, where pair of year and month is unique
 cars = []  # Findings based of user input
 
 
@@ -23,16 +23,16 @@ def average_day():
     for x, y in enumerate(dates):
         cars.extend(connection.find(
             {"MAKE": user_input[0], "MODEL": user_input[1], "YEAR": int(user_input[2]), "ENGINE_TYPE": user_input[3],
-             "FIRST_SEARCH": dates[x]}))
+             "SEARCHES": dates[x]}))
 
     for date in cars:
-        if date['FIRST_SEARCH'] not in dates_present:
-            dates_present.append(date['FIRST_SEARCH'])
+        if date['SEARCHES'] not in dates_present:
+            dates_present.append(date['SEARCHES'])
 
     for x in dates:
         temp = []
         for y in cars:
-            if y['FIRST_SEARCH'] == x:
+            if y['SEARCHES'] == x:
                 temp.append(y['PRICE'])
                 # print('DAY: ', x, 'PRICE: ', y['PRICE'])
         daily_prices.append(temp)
@@ -64,7 +64,7 @@ def average_weekly():
     Method counting average of all of the car prices from the week
     :return:
     """
-    all_dates = []
+    all_dates = []  # Similar to show_unique_dates but without day
     for date in show_unique_dates():
         temp = [date[0], date[1]]
         all_dates.append(temp)
@@ -74,7 +74,16 @@ def average_weekly():
 
     cal = calendar.Calendar()
     for date in year_month:
-        to_dates(cal.monthdayscalendar(date[0], date[1]), date[1], date[0])
+        month = to_dates(cal.monthdayscalendar(date[0], date[1]), date[1], date[0])
+        print('\n', month)  # TESTING PURPOSES
+        week_count = []
+        for x in month:
+            temp = []
+            for y in x:
+                if y in dates_present:
+                    temp.append(y)
+            week_count.append(temp)
+        print('Dates algorithm was running, put in weeks : {}'.format(week_count))   # TESTING PURPOSES
 
 
 def to_dates(calendar, month, year):
@@ -91,4 +100,4 @@ def to_dates(calendar, month, year):
             if day is not 0:
                 week_dates.append('{}-{}-{}'.format(year, month, day))
         month_dates.append(week_dates)
-    print(month_dates)
+    return month_dates
