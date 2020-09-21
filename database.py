@@ -1,10 +1,9 @@
 import pymongo
 from multiprocessing import Pipe, Process
 from importlib import reload
-from datetime import date
-import time
+import datetime
 
-today = date(time.localtime().tm_year, time.localtime().tm_mon, time.localtime().tm_mday).isoformat()
+today = '{dt.year}-{dt.month}-{dt.day}'.format(dt=datetime.datetime.now())
 
 
 def establish_connection():

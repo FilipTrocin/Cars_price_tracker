@@ -1,11 +1,10 @@
 import requests
 import bs4
-from datetime import date
-import time
+import datetime
 from UI import user_input
 s = requests.Session()
 
-today = date(time.localtime().tm_year, time.localtime().tm_mon, time.localtime().tm_mday).isoformat()
+today = '{dt.year}-{dt.month}-{dt.day}'.format(dt=datetime.datetime.now())
 web_results = []
 
 
