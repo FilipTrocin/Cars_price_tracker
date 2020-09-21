@@ -58,6 +58,8 @@ def average_day():
     except ZeroDivisionError:
         pass
 
+    print("THESE ARE DAILY PRICES: ", daily_prices)  # TESTING PURPOSES
+
 
 def average_weekly():
     """
@@ -73,6 +75,7 @@ def average_weekly():
             year_month.append(x)
 
     cal = calendar.Calendar()
+    count = 0
     for date in year_month:
         month = to_dates(cal.monthdayscalendar(date[0], date[1]), date[1], date[0])
         print('\n', month)  # TESTING PURPOSES
@@ -81,7 +84,8 @@ def average_weekly():
             temp = []
             for y in x:
                 if y in dates_present:
-                    temp.append(y)
+                    temp.append(avg_daily_price[count])
+                    count += 1
             week_count.append(temp)
         print('Dates algorithm was running, put in weeks : {}'.format(week_count))   # TESTING PURPOSES
 
