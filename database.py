@@ -24,7 +24,7 @@ def searched_today():
     :return:
     """
     from UI import user_input
-    if establish_connection().find_one({"MAKE": user_input[0], "MODEL": user_input[1], "FIRST_SEARCH": today}) is not None:
+    if establish_connection().find_one({"MAKE": user_input[0], "MODEL": user_input[1], "SEARCHES": today}) is not None:
         return True
     else:
         return False
@@ -63,7 +63,7 @@ def query_database():
 def show_unique_dates():
     """Method returning unique dates in which the algorithm was running, downloading data by a particular car model"""
     dates = []
-    unique = establish_connection().distinct("FIRST_SEARCH")
+    unique = establish_connection().distinct("SEARCHES")
     unique = [x.split('-') for x in unique]
     for date in unique:
         temp = []
