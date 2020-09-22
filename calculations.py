@@ -6,7 +6,9 @@ connection = establish_connection()
 
 dates = connection.distinct('SEARCHES')
 dates_present = []  # dates in which car with that specification is present in database
-avg_daily_price = []  # Average of daily prices
+boundaries_dates = []  # First and last day from a week
+avg_daily_price = []  # Average from prices during a day
+avg_weekly_price = []  # Average from prices during a week
 year_month = []  # date in [[year, month]] format, where pair of year and month is unique
 cars = []  # Findings based of user input
 
@@ -47,7 +49,7 @@ def average_day():
             avg = sum(x) / len(x)
             avg_daily_price.append(avg)
             print(f'• On day {dates_present[count]} car with that specification cost on average {round(avg, 2)}PLN '
-                  f'({len(x)} cars in that day)')
+                  f'({len(x)} car/s in that day)')
             count += 1
         except ZeroDivisionError:
             pass
@@ -55,7 +57,7 @@ def average_day():
         flatten = [item for items in daily_prices for item in items]
         overall_avg = sum(flatten) / len(flatten)
         print(
-            f"Based on the past and current data, the average price for car with that specification is: {round(overall_avg, 2)}PLN")
+            f"Based on all data you gathered, car like this costs on average: {round(overall_avg, 2)}PLN")
     except ZeroDivisionError:
         pass
 
@@ -77,6 +79,10 @@ def average_weekly():
     count = 0
     for date in year_month:
         month = to_dates(cal.monthdayscalendar(date[0], date[1]), date[1], date[0])
+        for week in month:
+            temp = [week[0], week[-1]]
+            boundaries_dates.append(temp)
+
         week_count = []
         for x in month:
             temp = []
@@ -86,6 +92,18 @@ def average_weekly():
                     count += 1
             week_count.append(temp)
         # print('Prices of that car put in weeks : {}'.format(week_count))   # TESTING PURPOSES
+
+        for week in week_count:
+            temp = []
+            for car in week:
+                temp.append(car)
+
+            try:
+                summed = sum(temp)/len(temp)
+                avg_weekly_price.append(summed)
+            except ZeroDivisionError:
+                avg_weekly_price.append(0)
+        # print('This is weekly price: ', avg_weekly_price)  # TESTING PURPOSES
 
 
 def to_dates(calendar, month, year):
