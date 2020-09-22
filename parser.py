@@ -30,7 +30,6 @@ def parse_html(made, model):
     return bs4.BeautifulSoup(open(file), 'html.parser')
 
 
-# Here I can swap 'suzuki' and 'samurai' by any other car make and model. User will be able to decide
 soup = parse_html(user_input[0], user_input[1])
 
 

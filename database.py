@@ -54,7 +54,7 @@ def query_database():
     print('Hello Database!: ', user_input, '\n')
 
     # TESTING - Printing all of the cars existing in a database (in respect to make and model user specified)
-    # If making test, comment import calculations to calling average function
+    # If making test, comment import calculations to calling average_weekly function
     # criteria = establish_connection().find({"MAKE": user_input[0], "MODEL": user_input[1]})
     # for post in criteria:
     #     print(post)
