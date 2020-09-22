@@ -22,7 +22,7 @@ def average_day():
     # List of all cars matching user's criteria and existing in a database in concrete dates the algorithm was running
     for x, y in enumerate(dates):
         cars.extend(connection.find(
-            {"MAKE": user_input[0], "MODEL": user_input[1], "YEAR": user_input[2], "ENGINE_TYPE": user_input[3],
+            {"MAKE": user_input[0], "MODEL": user_input[1], "YEAR": int(user_input[2]), "ENGINE_TYPE": user_input[3],
              "SEARCHES": dates[x]}))
 
     for date in cars:
