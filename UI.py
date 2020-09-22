@@ -37,11 +37,16 @@ class SearchPerformer(BoxLayout):
         specs = [self.ids.crmk.text, self.ids.crmd.text, self.ids.cryr.text, self.ids.crft.text]
         trimmed = [item.strip() for item in specs]
         lowered = [item.lower() for item in trimmed]
-        user_input.extend(lowered)
-        database.add_to_database()
-        database.query_database()
-        database.run_plot()
-        user_input.clear()
+        try:
+            int(self.ids.cryr.text)
+            user_input.extend(lowered)
+            database.add_to_database()
+            database.query_database()
+            database.run_plot()
+            user_input.clear()
+        except ValueError:
+            user_input.clear()
+            print('You did not provide a car year')
 
     def clear(self):
         self.ids.crmk.text = ""
@@ -53,5 +58,3 @@ class SearchPerformer(BoxLayout):
 class PriceTrackerUIApp(App):
     def build(self):
         return SearchPerformer()
-
-
