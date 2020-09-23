@@ -14,6 +14,7 @@ def plot_bar_show():
     plt.title('Daily Prices')
     plt.xlabel('DATE')
     plt.ylabel('PRICE')
+    plt.savefig('daily.png', )
     plt.show()
 
 
@@ -28,4 +29,5 @@ def weekly_bar_show():
     plt.title('Weekly Prices')
     plt.xlabel('DATE')
     plt.ylabel('PRICE')
+    plt.savefig('weekly.png')
     plt.show()
