@@ -6,7 +6,7 @@ connection = establish_connection()
 
 dates = connection.distinct('SEARCHES')
 dates_present = []  # dates in which car with that specification is present in database
-boundaries_dates = []  # First and last day from a week
+boundaries = []  # First and last day from a week
 avg_daily_price = []  # Average from prices during a day
 avg_weekly_price = []  # Average from prices during a week
 year_month = []  # date in [[year, month]] format, where pair of year and month is unique
@@ -80,8 +80,8 @@ def average_weekly():
     for date in year_month:
         month = to_dates(cal.monthdayscalendar(date[0], date[1]), date[1], date[0])
         for week in month:
-            temp = [week[0], week[-1]]
-            boundaries_dates.append(temp)
+            temp = '{} - \n{}'.format(week[0], week[-1])
+            boundaries.append(temp)
 
         week_count = []
         for x in month:
