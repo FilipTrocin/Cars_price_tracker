@@ -101,5 +101,5 @@ def run_plot():
     """
     import plot
     reload(plot)
-    plot.plot_bar_show()
-    plot.weekly_bar_show()
+    plot.plot_daily_graph()
+    plot.plot_weekly_graph()

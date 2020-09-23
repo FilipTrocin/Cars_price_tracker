@@ -3,7 +3,7 @@ from calculations import dates_present, boundaries, avg_daily_price, avg_weekly_
 from matplotlib.ticker import FormatStrFormatter
 
 
-def plot_bar_show():
+def plot_daily_graph():
     plt.style.use('ggplot')
     fig, ax = plt.subplots()
 
@@ -18,14 +18,14 @@ def plot_bar_show():
     plt.show()
 
 
-def weekly_bar_show():
+def plot_weekly_graph():
     plt.style.use('ggplot')
     fig, ax = plt.subplots()
 
     formatter = FormatStrFormatter('%1.2f PLN')
     ax.yaxis.set_major_formatter(formatter)
 
-    plt.bar(boundaries, avg_weekly_price, color="turquoise")  # PRABABLE ISSUE WITH BOUNDARIES FORMAT AS IT IS PROVIDED AS A LIST
+    plt.bar(boundaries, avg_weekly_price, color="turquoise")
     plt.title('Weekly Prices')
     plt.xlabel('DATE')
     plt.ylabel('PRICE')
