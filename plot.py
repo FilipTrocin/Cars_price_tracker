@@ -14,7 +14,7 @@ def plot_daily_graph():
     plt.title('Daily Prices')
     plt.xlabel('DATE')
     plt.ylabel('PRICE')
-    plt.savefig('daily.png', )
+    plt.savefig('daily.png', bbox_inches='tight')
     plt.show()
 
 
@@ -29,5 +29,5 @@ def plot_weekly_graph():
     plt.title('Weekly Prices')
     plt.xlabel('DATE')
     plt.ylabel('PRICE')
-    plt.savefig('weekly.png')
+    plt.savefig('weekly.png', bbox_inches='tight')
     plt.show()
