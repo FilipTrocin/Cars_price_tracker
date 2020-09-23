@@ -100,7 +100,8 @@ def average_weekly():
 
             try:
                 summed = sum(temp)/len(temp)
-                avg_weekly_price.append(summed)
+                rounded = round(summed, 2)
+                avg_weekly_price.append(rounded)
             except ZeroDivisionError:
                 avg_weekly_price.append(0)
         # print('This is weekly price: ', avg_weekly_price)  # TESTING PURPOSES
