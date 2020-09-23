@@ -102,3 +102,4 @@ def run_plot():
     import plot
     reload(plot)
     plot.plot_bar_show()
+    plot.weekly_bar_show()
