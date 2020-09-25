@@ -24,7 +24,7 @@ class PopupWindow(BoxLayout):
 def popup_show():
     pop = PopupWindow()
 
-    pop_win = Popup(title="Analysis", content=pop, size_hint=(None, None), size=(1500, 700))
+    pop_win = Popup(title="Analysis", content=pop, size_hint=(.9, .9))
     pop_win.open()
 
 
