@@ -4,8 +4,8 @@ import database
 from kivy.app import App
 from kivy.core.text import LabelBase
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.popup import Popup
+from kivy.properties import StringProperty
 
 kivy.require('1.11.1')
 
@@ -16,8 +16,9 @@ LabelBase.register('Arial_Rounded_Bold', fn_regular=os.path.join(os.path.dirname
 user_input = []
 
 
-class PopupWindow(FloatLayout):
-    pass
+class PopupWindow(BoxLayout):
+    daily = StringProperty('./daily.png')
+    weekly = StringProperty('./weekly.png')
 
 
 def popup_show():
