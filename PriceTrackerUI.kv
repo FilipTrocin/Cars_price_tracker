@@ -2,11 +2,19 @@
 
 <PopupWindow>
     BoxLayout:
-        orientation: 'vertical'
+        orientation: 'horizontal'
+        size: root.size
         cols: 2
 
+        AsyncImage:
+            source: root.daily
+            pos_hint: {'x': 0, 'center_y': .5}
+
         Label:
-            text: "Tu będzie wykres"
+            text: "MAINTENANCE"
+            pos_hint: {'x': 5, 'center_y': .5}
+
+
 
 
 <SmoothInput@TextInput>
