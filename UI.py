@@ -20,6 +20,7 @@ user_input = []
 class DailyPopup(BoxLayout):
     daily = StringProperty('./daily.png')
     weekly = StringProperty('./weekly.png')
+    button = StringProperty('./iu.png')
 
 
 def popup_show():
