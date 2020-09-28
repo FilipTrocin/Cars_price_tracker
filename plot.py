@@ -12,10 +12,8 @@ def plot_daily_graph():
 
     plt.bar(dates_present, avg_daily_price, color="orangered")
     plt.title('Daily Prices')
-    plt.xlabel('DATE')
-    plt.ylabel('PRICE')
     plt.savefig('daily.png', bbox_inches='tight')
-    plt.show()
+    # plt.show()
 
 
 def plot_weekly_graph():
@@ -27,7 +25,5 @@ def plot_weekly_graph():
 
     plt.bar(boundaries, avg_weekly_price, color="turquoise")
     plt.title('Weekly Prices')
-    plt.xlabel('DATE')
-    plt.ylabel('PRICE')
     plt.savefig('weekly.png', bbox_inches='tight')
     plt.show()
