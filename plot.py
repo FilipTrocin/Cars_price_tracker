@@ -5,7 +5,7 @@ from matplotlib.ticker import FormatStrFormatter
 
 def plot_daily_graph():
     plt.style.use('ggplot')
-    fig, ax = plt.subplots(figsize=(8, 4))
+    fig, ax = plt.subplots(figsize=(10, 4))
 
     formatter = FormatStrFormatter('%1.2f PLN')
     ax.yaxis.set_major_formatter(formatter)
