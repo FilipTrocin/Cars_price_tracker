@@ -17,13 +17,13 @@ LabelBase.register('Arial_Rounded_Bold', fn_regular=os.path.join(os.path.dirname
 user_input = []
 
 
-class PopupWindow(BoxLayout):
+class DailyPopup(BoxLayout):
     daily = StringProperty('./daily.png')
     weekly = StringProperty('./weekly.png')
 
 
 def popup_show():
-    pop = PopupWindow()
+    pop = DailyPopup()
 
     pop_win = Popup(title="Analysis", content=pop, size_hint=(.9, .9))
     pop_win.open()
