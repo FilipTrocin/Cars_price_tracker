@@ -2,12 +2,12 @@
 
 <PopupWindow>
     orientation: 'vertical'
-    size_hint: 1, .9
     BoxLayout:
         orientation: 'horizontal'
         cols: 2
 
         AsyncImage:
+            id: img
             source: root.daily
             allow_stretch: True
             size_hint: .9, 1

@@ -6,6 +6,7 @@ from kivy.core.text import LabelBase
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.popup import Popup
 from kivy.properties import StringProperty
+from kivy.properties import ObjectProperty
 
 kivy.require('1.11.1')
 
@@ -26,13 +27,15 @@ def popup_show():
 
     pop_win = Popup(title="Analysis", content=pop, size_hint=(.9, .9))
     pop_win.open()
+    return pop  # saving a reference to PopupWindow()
 
 
 class SearchPerformer(BoxLayout):
     dt = database
+    pop = ObjectProperty(None)
 
     def hit_enter(self):
-        popup_show()
+        self.pop = popup_show()
 
     def input_grabber(self, database):
         specs = [self.ids.crmk.text, self.ids.crmd.text, self.ids.cryr.text, self.ids.crft.text]
@@ -44,6 +47,8 @@ class SearchPerformer(BoxLayout):
             database.add_to_database()
             database.query_database()
             database.run_plot()
+            if self.pop is not None:  # If PopupWindow exists
+                self.pop.ids.img.reload()
             user_input.clear()
         except ValueError:
             user_input.clear()
