@@ -29,7 +29,7 @@ class DailyPopup(BoxLayout):
 def popup_show():
     pop = DailyPopup()
 
-    pop_win = Popup(title="Analysis", content=pop, size_hint=(.9, .9))
+    pop_win = Popup(title="Analysis", content=pop, size_hint=(.99, .9))
     pop_win.open()
     return pop  # saving a reference to PopupWindow()
 
