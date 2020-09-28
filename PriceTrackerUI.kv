@@ -25,10 +25,10 @@
     BoxLayout:
         size_hint: 1, .1
         ScrollView:
-            do_scroll_y: False
-            do_scroll_x: True
+            do_scroll_y: True
+            do_scroll_x: False
             Label:
-                text: ' MAINTENANCE ' * 10
+                text: "".join(root.analysis)
                 size_hint: None, None
                 size: self.texture_size
 

@@ -7,6 +7,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.popup import Popup
 from kivy.properties import StringProperty
 from kivy.properties import ObjectProperty
+from kivy.properties import ListProperty
 
 kivy.require('1.11.1')
 
@@ -21,6 +22,8 @@ class DailyPopup(BoxLayout):
     daily = StringProperty('./daily.png')
     weekly = StringProperty('./weekly.png')
     button = StringProperty('./iu.png')
+
+    analysis = ListProperty(database.daily_analysis)
 
 
 def popup_show():

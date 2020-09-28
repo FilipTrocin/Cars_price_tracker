@@ -4,6 +4,7 @@ from importlib import reload
 import datetime
 
 today = '{dt.year}-{dt.month}-{dt.day}'.format(dt=datetime.datetime.now())
+daily_analysis = []
 
 
 def establish_connection():
@@ -51,6 +52,7 @@ def query_database():
     reload(calculations)
     calculations.average_day()
     calculations.average_weekly()
+    daily_analysis.extend(calculations.daily_analysis)
     print('Hello Database!: ', user_input, '\n')
 
     # TESTING - Printing all of the cars existing in a database (in respect to make and model user specified)

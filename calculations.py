@@ -12,6 +12,8 @@ avg_weekly_price = []  # Average from prices during a week
 year_month = []  # date in [[year, month]] format, where pair of year and month is unique
 cars = []  # Findings based of user input
 
+daily_analysis = []  # • On day yyy-m-dd car with that specification cost on average xxxxPLN (z car/s in that day)
+
 
 def average_day():
     """
@@ -50,6 +52,8 @@ def average_day():
             avg_daily_price.append(avg)
             print(f'• On day {dates_present[count]} car with that specification cost on average {round(avg, 2)}PLN '
                   f'({len(x)} car/s in that day)')
+            daily_analysis.append(f'• On day {dates_present[count]} car with that specification cost on average {round(avg, 2)}PLN '
+                                  f'({len(x)} car/s in that day)\n')
             count += 1
         except ZeroDivisionError:
             pass
