@@ -11,9 +11,10 @@ from kivy.properties import ListProperty
 
 kivy.require('1.11.1')
 
-# Font for Label
+# Fonts for Label
 LabelBase.register('Arial_Rounded_Bold', fn_regular=os.path.join(os.path.dirname(__file__),
-                                                                 'Font/Arial_Rounded_Bold.ttf'))
+                                                                 'Fonts/Arial_Rounded_Bold.ttf'))
+LabelBase.register('AmericanTypewriter', fn_regular=os.path.join(os.path.dirname(__file__), 'Fonts/AmericanTypewriter.ttc'))
 
 user_input = []
 
@@ -21,7 +22,7 @@ user_input = []
 class DailyPopup(BoxLayout):
     daily = StringProperty('./daily.png')
     weekly = StringProperty('./weekly.png')
-    button = StringProperty('./iu.png')
+    button = StringProperty('./Graphics/iu.png')
 
     analysis = ListProperty(database.daily_analysis)
 
@@ -29,7 +30,7 @@ class DailyPopup(BoxLayout):
 def popup_show():
     pop = DailyPopup()
 
-    pop_win = Popup(title="Analysis", content=pop, size_hint=(.99, .9))
+    pop_win = Popup(title="Daily Prices", title_align='center', title_size=40, title_font='AmericanTypewriter', content=pop, size_hint=(.99, .93))
     pop_win.open()
     return pop  # saving a reference to PopupWindow()
 

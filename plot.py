@@ -11,7 +11,6 @@ def plot_daily_graph():
     ax.yaxis.set_major_formatter(formatter)
 
     plt.bar(dates_present, avg_daily_price, color="orangered")
-    plt.title('Daily Prices')
     plt.savefig('daily.png', bbox_inches='tight')
 
 
