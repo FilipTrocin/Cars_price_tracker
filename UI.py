@@ -14,25 +14,42 @@ kivy.require('1.11.1')
 # Fonts for Label
 LabelBase.register('Arial_Rounded_Bold', fn_regular=os.path.join(os.path.dirname(__file__),
                                                                  'Fonts/Arial_Rounded_Bold.ttf'))
-LabelBase.register('AmericanTypewriter', fn_regular=os.path.join(os.path.dirname(__file__), 'Fonts/AmericanTypewriter.ttc'))
-
+LabelBase.register('AmericanTypewriter', fn_regular=os.path.join(os.path.dirname(__file__),
+                                                                 'Fonts/AmericanTypewriter.ttc'))
 user_input = []
 
 
 class DailyPopup(BoxLayout):
+    forward = ObjectProperty(None)
+
     daily = StringProperty('./daily.png')
-    weekly = StringProperty('./weekly.png')
     button = StringProperty('./Graphics/iu.png')
 
     analysis = ListProperty(database.daily_analysis)
 
+    def hit_forward(self):
+        self.forward = weekly_popup()
 
-def popup_show():
+
+class WeeklyPopup(BoxLayout):
+    weekly = StringProperty('./weekly.png')
+    button = StringProperty('./Graphics/iu.png')
+
+
+def daily_popup():
     pop = DailyPopup()
 
     pop_win = Popup(title="Daily Prices", title_align='center', title_size=40, title_font='AmericanTypewriter', content=pop, size_hint=(.99, .93))
     pop_win.open()
-    return pop  # saving a reference to PopupWindow()
+    return pop  # saving a reference to DailyPopup()
+
+
+def weekly_popup():
+    pop = WeeklyPopup()
+    pop_win = Popup(title="Weekly Prices", title_align='center', title_size=40, title_font='AmericanTypewriter',
+                    content=pop, size_hint=(.99, .93))
+    pop_win.open()
+    return pop  # saving a reference to WeeklyPopup()
 
 
 class SearchPerformer(BoxLayout):
@@ -40,7 +57,7 @@ class SearchPerformer(BoxLayout):
     pop = ObjectProperty(None)
 
     def hit_enter(self):
-        self.pop = popup_show()
+        self.pop = daily_popup()
 
     def input_grabber(self, database):
         specs = [self.ids.crmk.text, self.ids.crmd.text, self.ids.cryr.text, self.ids.crft.text]

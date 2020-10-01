@@ -17,6 +17,7 @@
         Button:
             size_hint: .1, .2
             pos_hint: {'x': 5, 'center_y': .5}
+            on_release: root.hit_forward()
             AsyncImage:
                 source: root.button
                 center_x: self.parent.center_x
