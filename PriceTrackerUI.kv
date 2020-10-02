@@ -1,6 +1,6 @@
 #: import C kivy.utils.get_color_from_hex
 
-<DailyPopup>
+<PopupWindow>
     do_default_tab: False
     TabbedPanelItem:
         id: tab1
@@ -41,6 +41,7 @@
         id: tab2
         text: 'Weekly View'
         AsyncImage:
+            id: week
             source: root.weekly
             allow_stretch: True
             size_hint: .9, 1
