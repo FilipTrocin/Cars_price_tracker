@@ -58,6 +58,7 @@ class SearchPerformer(BoxLayout):
             database.run_plot()
             if self.pop is not None:  # If PopupWindow exists
                 self.pop.ids.img.reload()
+                self.pop.ids.week.reload()
             user_input.clear()
         except ValueError:
             user_input.clear()
