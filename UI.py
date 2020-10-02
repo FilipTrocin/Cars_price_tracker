@@ -4,7 +4,7 @@ import database
 from kivy.app import App
 from kivy.core.text import LabelBase
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.popup import Popup
+from kivy.uix.modalview import ModalView
 from kivy.properties import StringProperty
 from kivy.properties import ObjectProperty
 from kivy.properties import ListProperty
@@ -20,7 +20,7 @@ LabelBase.register('AmericanTypewriter', fn_regular=os.path.join(os.path.dirname
 user_input = []
 
 
-class DailyPopup(TabbedPanel):
+class PopupWindow(TabbedPanel):
     forward = ObjectProperty(None)
 
     daily = StringProperty('./daily.png')
@@ -30,10 +30,10 @@ class DailyPopup(TabbedPanel):
     analysis = ListProperty(database.daily_analysis)
 
 
-def daily_popup():
-    pop = DailyPopup()
-    pop_win = Popup(title="Daily Prices", title_align='center', title_size=40, title_font='AmericanTypewriter',
-                    content=pop, size_hint=(.99, .93))
+def popup_show():
+    pop = PopupWindow()
+    pop_win = ModalView(border=(16, 32, 16, 32), size_hint=(.99, .93))
+    pop_win.add_widget(pop)
 
     pop_win.open()
     return pop  # saving a reference to DailyPopup()
@@ -44,7 +44,7 @@ class SearchPerformer(BoxLayout):
     pop = ObjectProperty(None)
 
     def hit_enter(self):
-        self.pop = daily_popup()
+        self.pop = popup_show()
 
     def input_grabber(self, database):
         specs = [self.ids.crmk.text, self.ids.crmd.text, self.ids.cryr.text, self.ids.crft.text]
