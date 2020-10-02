@@ -8,6 +8,7 @@ from kivy.uix.popup import Popup
 from kivy.properties import StringProperty
 from kivy.properties import ObjectProperty
 from kivy.properties import ListProperty
+from kivy.uix.tabbedpanel import TabbedPanel
 
 kivy.require('1.11.1')
 
@@ -19,37 +20,23 @@ LabelBase.register('AmericanTypewriter', fn_regular=os.path.join(os.path.dirname
 user_input = []
 
 
-class DailyPopup(BoxLayout):
+class DailyPopup(TabbedPanel):
     forward = ObjectProperty(None)
 
     daily = StringProperty('./daily.png')
+    weekly = StringProperty('./weekly.png')
     button = StringProperty('./Graphics/iu.png')
 
     analysis = ListProperty(database.daily_analysis)
 
-    def hit_forward(self):
-        self.forward = weekly_popup()
-
-
-class WeeklyPopup(BoxLayout):
-    weekly = StringProperty('./weekly.png')
-    button = StringProperty('./Graphics/iu.png')
-
 
 def daily_popup():
     pop = DailyPopup()
+    pop_win = Popup(title="Daily Prices", title_align='center', title_size=40, title_font='AmericanTypewriter',
+                    content=pop, size_hint=(.99, .93))
 
-    pop_win = Popup(title="Daily Prices", title_align='center', title_size=40, title_font='AmericanTypewriter', content=pop, size_hint=(.99, .93))
     pop_win.open()
     return pop  # saving a reference to DailyPopup()
-
-
-def weekly_popup():
-    pop = WeeklyPopup()
-    pop_win = Popup(title="Weekly Prices", title_align='center', title_size=40, title_font='AmericanTypewriter',
-                    content=pop, size_hint=(.99, .93))
-    pop_win.open()
-    return pop  # saving a reference to WeeklyPopup()
 
 
 class SearchPerformer(BoxLayout):
@@ -86,3 +73,4 @@ class SearchPerformer(BoxLayout):
 class PriceTrackerUIApp(App):
     def build(self):
         return SearchPerformer()
+
