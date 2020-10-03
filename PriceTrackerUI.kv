@@ -26,9 +26,10 @@
                         center_y: self.parent.center_y
 
 
-            BoxLayout:
+            FloatLayout:
                 size_hint: 1, .25
                 ScrollView:
+                    pos_hint: {'x': .01, 'y': .1}
                     do_scroll_y: True
                     do_scroll_x: False
                     Label:
@@ -36,6 +37,7 @@
                         font_size: 40
                         size_hint: None, None
                         size: self.texture_size
+
 
     TabbedPanelItem:
         id: tab2
@@ -60,9 +62,10 @@
                     size_hint: .9, 1
                     pos_hint: {'x': .0827, 'center_y': .5}
 
-            BoxLayout:
+            FloatLayout:
                 size_hint: 1, .25
                 ScrollView:
+                    pos_hint: {'x': .01, 'y': .1}
                     do_scroll_y: True
                     do_scroll_x: False
                     Label:
