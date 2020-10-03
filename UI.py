@@ -21,13 +21,14 @@ user_input = []
 
 
 class PopupWindow(TabbedPanel):
-    forward = ObjectProperty(None)
-
     daily = StringProperty('./daily.png')
     weekly = StringProperty('./weekly.png')
     button = StringProperty('./Graphics/iu.png')
 
     analysis = ListProperty(database.daily_analysis)
+
+    def go_forward(self):
+        self.switch_to(self.tab_list[0])
 
 
 def popup_show():
@@ -57,7 +58,7 @@ class SearchPerformer(BoxLayout):
             database.query_database()
             database.run_plot()
             if self.pop is not None:  # If PopupWindow exists
-                self.pop.ids.img.reload()
+                self.pop.ids.day.reload()
                 self.pop.ids.week.reload()
             user_input.clear()
         except ValueError:
