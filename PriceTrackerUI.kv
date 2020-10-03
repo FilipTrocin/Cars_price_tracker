@@ -12,7 +12,7 @@
                 orientation: 'horizontal'
                 cols: 2
                 AsyncImage:
-                    id: img
+                    id: day
                     source: root.daily
                     size_hint: .9, 1
                     allow_stretch: True
@@ -20,6 +20,7 @@
                 Button:
                     size_hint: .1, .2
                     pos_hint: {'x': 5, 'center_y': .5}
+                    on_release: root.go_forward()
                     AsyncImage:
                         source: root.button
                         center_x: self.parent.center_x
@@ -34,8 +35,6 @@
                         font_size: 40
                         size_hint: None, None
                         size: self.texture_size
-
-
 
     TabbedPanelItem:
         id: tab2
