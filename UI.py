@@ -23,12 +23,16 @@ user_input = []
 class PopupWindow(TabbedPanel):
     daily = StringProperty('./daily.png')
     weekly = StringProperty('./weekly.png')
-    button = StringProperty('./Graphics/iu.png')
+    right_b = StringProperty('./Graphics/right.png')
+    left_b = StringProperty('./Graphics/left.png')
 
     analysis = ListProperty(database.daily_analysis)
 
     def go_forward(self):
         self.switch_to(self.tab_list[0])
+
+    def go_backward(self):
+        self.switch_to(self.tab_list[1])
 
 
 def popup_show():
