@@ -7,26 +7,27 @@
         text: 'Daily View'
         BoxLayout:
             orientation: 'vertical'
-            BoxLayout:
-                size_hint: 1, .8
-                orientation: 'horizontal'
-                cols: 2
+            spacing: 25
+            FloatLayout:
                 AsyncImage:
                     id: day
                     source: root.daily
-                    size_hint: .9, 1
                     allow_stretch: True
+                    size_hint: .9, 1
+                    pos_hint: {'x': .001, 'center_y': .5}
 
                 Button:
-                    size_hint: .1, .2
-                    pos_hint: {'x': 5, 'center_y': .5}
+                    size_hint: .09, 1
+                    pos_hint: {'x': .906,'center_y': .5}
                     on_release: root.go_forward()
                     AsyncImage:
-                        source: root.button
+                        source: root.right_b
                         center_x: self.parent.center_x
                         center_y: self.parent.center_y
+
+
             BoxLayout:
-                size_hint: 1, .2
+                size_hint: 1, .25
                 ScrollView:
                     do_scroll_y: True
                     do_scroll_x: False
@@ -39,12 +40,37 @@
     TabbedPanelItem:
         id: tab2
         text: 'Weekly View'
-        AsyncImage:
-            id: week
-            source: root.weekly
-            allow_stretch: True
-            size_hint: .9, 1
-            pos_hint: {'x': 0, 'center_y': .5}
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: 25
+            FloatLayout:
+                Button:
+                    size_hint: .09, 1
+                    pos_hint: {'x': .005,'center_y': .5}
+                    on_release: root.go_backward()
+                    AsyncImage:
+                        source: root.left_b
+                        center_x: self.parent.center_x
+                        center_y: self.parent.center_y
+
+                AsyncImage:
+                    id: week
+                    source: root.weekly
+                    allow_stretch: True
+                    size_hint: .9, 1
+                    pos_hint: {'x': .0827, 'center_y': .5}
+
+            BoxLayout:
+                size_hint: 1, .25
+                ScrollView:
+                    do_scroll_y: True
+                    do_scroll_x: False
+                    Label:
+                        text: "".join(root.analysis)
+                        font_size: 40
+                        size_hint: None, None
+                        size: self.texture_size
+
 
 
 <SmoothInput@TextInput>
