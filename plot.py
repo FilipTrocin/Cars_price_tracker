@@ -22,6 +22,5 @@ def plot_weekly_graph():
     ax.yaxis.set_major_formatter(formatter)
 
     plt.bar(boundaries, avg_weekly_price, color="turquoise")
-    plt.title('Weekly Prices')
     plt.savefig('weekly.png', bbox_inches='tight')
     plt.show()
