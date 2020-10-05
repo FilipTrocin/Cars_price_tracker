@@ -27,6 +27,27 @@ def add_ten_dates(dates):
     return ten_dates
 
 
+def create_index(dates):
+    """
+    Method creating unique indexes for every 10 elements
+    :param dates: list of dates
+    :return: list of keys
+    """
+    cnt = 0
+    keys_c = 1
+    keys = []
+    for _ in dates:
+        if not keys:
+            keys.append('data0')
+        if cnt == 10:
+            keys.append('data{}'.format(keys_c))
+            keys_c += 1
+            cnt = 0
+        else:
+            cnt += 1
+    return keys
+
+
 def plot_daily_graph():
     plt.style.use('ggplot')
     fig, ax = plt.subplots(figsize=(10, 4))
