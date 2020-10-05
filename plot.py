@@ -48,6 +48,22 @@ def create_index(dates):
     return keys
 
 
+def create_dictionary(dates):
+    """
+    Method creating a dictionary of keys (products of create_index method) and values
+    (products of add_ten_dates method)
+    :return:
+    """
+    dictionary = dict()
+    count = 0
+    dt = add_ten_dates(dates)
+    keys = create_index(dates)
+    for key in keys:
+        dictionary[key] = dt[count]
+        count += 1
+    return dictionary
+
+
 def plot_daily_graph():
     plt.style.use('ggplot')
     fig, ax = plt.subplots(figsize=(10, 4))
