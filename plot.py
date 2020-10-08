@@ -3,11 +3,12 @@ from calculations import dates_present, boundaries, avg_daily_price, avg_weekly_
 from matplotlib.ticker import FormatStrFormatter
 
 
-def add_ten_dates(dates, prices):
+def add_ten(dates, prices):
     """
-    :param prices:
+    Method making 2d lists both for dates as well as prices, where each internal one has 10 elements
+    :param prices: list of all prices to be segregated
     :param dates: list of all dates to be segregated
-    :return: list of lists of 10 dates inside each internal one or the remaining dates if there was no 10
+    :return: 2d lists of dates and prices
     """
     ten_dates = []
     ten_prices = []
@@ -46,12 +47,12 @@ def add_ten_dates(dates, prices):
     return ten_dates, ten_prices
 
 
-def create_index(dates, prices):
+def create_indexes(dates, prices):
     """
     Method creating unique indexes for every 10 elements
-    :param prices:
+    :param prices: list of prices
     :param dates: list of dates
-    :return: list of dates_keys
+    :return: lists of keys both for dates and prices
     """
     cnt = 0
     keys_c = 1
@@ -81,17 +82,17 @@ def create_index(dates, prices):
     return dates_keys, prices_keys
 
 
-def create_dictionary(dates, prices):
+def create_dictionaries(dates, prices):
     """
     Method creating a dictionary of keys (products of create_index method) and values
     (products of add_ten_dates method)
-    :return:
+    :return: dict of dates and prices
     """
     dt_dictionary = dict()
     pr_dictionary = dict()
     count = 0
-    dt_lst, pr_lst = add_ten_dates(dates, prices)
-    dt_keys, pr_keys = create_index(dates, prices)
+    dt_lst, pr_lst = add_ten(dates, prices)
+    dt_keys, pr_keys = create_indexes(dates, prices)
 
     for key in dt_keys:
         dt_dictionary[key] = dt_lst[count]
