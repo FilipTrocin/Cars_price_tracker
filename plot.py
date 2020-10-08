@@ -3,65 +3,106 @@ from calculations import dates_present, boundaries, avg_daily_price, avg_weekly_
 from matplotlib.ticker import FormatStrFormatter
 
 
-def add_ten_dates(dates):
+def add_ten_dates(dates, prices):
     """
+    :param prices:
     :param dates: list of all dates to be segregated
     :return: list of lists of 10 dates inside each internal one or the remaining dates if there was no 10
     """
     ten_dates = []
+    ten_prices = []
     count = 0
-    temp = []
+    temp_d = []
+    temp_p = []
     for date in dates:
         if count < 10:
-            temp.append(date)
+            temp_d.append(date)
             count += 1
         else:
-            cp = temp.copy()
+            cp = temp_d.copy()
             ten_dates.append(cp)
-            temp.clear()
+            temp_d.clear()
             count = 0
         if date is dates[-1]:
-            cp = temp.copy()
+            cp = temp_d.copy()
             ten_dates.append(cp)
-            temp.clear()
-    return ten_dates
+            temp_d.clear()
+
+    count = 0
+    for price in prices:
+        if count < 10:
+            temp_p.append(price)
+            count += 1
+        else:
+            cp = temp_p.copy()
+            ten_prices.append(cp)
+            temp_p.clear()
+            count = 0
+        if price is prices[-1]:
+            cp = temp_p.copy()
+            ten_prices.append(cp)
+            temp_p.clear()
+
+    return ten_dates, ten_prices
 
 
-def create_index(dates):
+def create_index(dates, prices):
     """
     Method creating unique indexes for every 10 elements
+    :param prices:
     :param dates: list of dates
-    :return: list of keys
+    :return: list of dates_keys
     """
     cnt = 0
     keys_c = 1
-    keys = []
+    dates_keys = []
     for _ in dates:
-        if not keys:
-            keys.append('data0')
+        if not dates_keys:
+            dates_keys.append('data0')
         if cnt == 10:
-            keys.append('data{}'.format(keys_c))
+            dates_keys.append('data{}'.format(keys_c))
             keys_c += 1
             cnt = 0
         else:
             cnt += 1
-    return keys
+
+    cnt = 0
+    keys_c = 1
+    prices_keys = []
+    for _ in prices:
+        if not prices_keys:
+            prices_keys.append('price0')
+        if cnt == 10:
+            prices_keys.append('price{}'.format(keys_c))
+            keys_c += 1
+            cnt = 0
+        else:
+            cnt += 1
+    return dates_keys, prices_keys
 
 
-def create_dictionary(dates):
+def create_dictionary(dates, prices):
     """
     Method creating a dictionary of keys (products of create_index method) and values
     (products of add_ten_dates method)
     :return:
     """
-    dictionary = dict()
+    dt_dictionary = dict()
+    pr_dictionary = dict()
     count = 0
-    dt = add_ten_dates(dates)
-    keys = create_index(dates)
-    for key in keys:
-        dictionary[key] = dt[count]
+    dt_lst, pr_lst = add_ten_dates(dates, prices)
+    dt_keys, pr_keys = create_index(dates, prices)
+
+    for key in dt_keys:
+        dt_dictionary[key] = dt_lst[count]
         count += 1
-    return dictionary
+
+    count = 0
+    for key in pr_keys:
+        pr_dictionary[key] = pr_lst[count]
+        count += 1
+
+    return dt_dictionary, pr_dictionary
 
 
 def plot_daily_graph():
