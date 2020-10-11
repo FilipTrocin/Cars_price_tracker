@@ -1,6 +1,17 @@
 import matplotlib.pyplot as plt
 from calculations import dates_present, boundaries, avg_daily_price, avg_weekly_price
 from matplotlib.ticker import FormatStrFormatter
+from kivy.properties import StringProperty
+from os import listdir, remove, path
+
+
+def delete_graphs():
+    for file in listdir():
+        if file.startswith('daily'):
+            remove(path=path.join(path.dirname(__file__), file))
+
+
+delete_graphs()
 
 
 def add_ten(dates, prices):
@@ -25,6 +36,9 @@ def add_ten(dates, prices):
             temp_d.clear()
             count = 0
         if date is dates[-1]:
+            if count == 0:
+                temp_d.append(date)  # TESTING PHASE
+                count += 1
             cp = temp_d.copy()
             ten_dates.append(cp)
             temp_d.clear()
@@ -40,10 +54,12 @@ def add_ten(dates, prices):
             temp_p.clear()
             count = 0
         if price is prices[-1]:
+            if count == 0:
+                temp_p.append(price)  # TESTING PHASE
+                count += 1
             cp = temp_p.copy()
             ten_prices.append(cp)
             temp_p.clear()
-
     return ten_dates, ten_prices
 
 
@@ -106,15 +122,49 @@ def create_dictionaries(dates, prices):
     return dt_dictionary, pr_dictionary
 
 
+def create_namings():
+    dictionary = dict()
+    for data in range(len(graph_input()[0])):
+        name = 'daily{}'.format(data)
+        dictionary[name] = StringProperty('./{}.png'.format(name))
+    return dictionary
+
+
+def graph_input():
+    dt_dictionary, pr_dictionary = create_dictionaries(dates_present, avg_daily_price)
+
+    dt_keys = [x for x in dt_dictionary.keys()]
+    pr_keys = [x for x in pr_dictionary.keys()]
+
+    all_dates = []  # 2D list of lists with 10 dates
+    for num in range(len(dt_keys)):
+        all_dates.append(dt_dictionary.get(dt_keys[num]))
+    # print(all_dates)
+
+    all_prices = []  # 2D list of lists with 10 prices
+    for num in range(len(pr_keys)):
+        all_prices.append(pr_dictionary.get(pr_keys[num]))
+    # print(all_prices)
+
+    return all_dates, all_prices
+
+
 def plot_daily_graph():
-    plt.style.use('ggplot')
-    fig, ax = plt.subplots(figsize=(10, 4))
+    all_dates, all_prices = graph_input()
 
-    formatter = FormatStrFormatter('%1.2f PLN')
-    ax.yaxis.set_major_formatter(formatter)
+    num = 0
+    for dates in all_dates:
+        plt.style.use('ggplot')
+        fig, ax = plt.subplots(figsize=(10, 4))
 
-    plt.bar(dates_present, avg_daily_price, color="orangered")
-    plt.savefig('daily.png', bbox_inches='tight')
+        formatter = FormatStrFormatter('%1.2f PLN')
+        ax.yaxis.set_major_formatter(formatter)
+
+        plt.bar(all_dates[num], all_prices[num], color="orangered")
+        plt.savefig(list(create_namings())[num], bbox_inches='tight')
+        plt.show()
+        if dates != all_dates[-1]:
+            num += 1
 
 
 def plot_weekly_graph():

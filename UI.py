@@ -5,7 +5,7 @@ from kivy.app import App
 from kivy.core.text import LabelBase
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.modalview import ModalView
-from kivy.properties import StringProperty
+from kivy.properties import StringProperty, NumericProperty
 from kivy.properties import ObjectProperty
 from kivy.properties import ListProperty
 from kivy.uix.tabbedpanel import TabbedPanel
@@ -20,8 +20,17 @@ LabelBase.register('AmericanTypewriter', fn_regular=os.path.join(os.path.dirname
 user_input = []
 
 
+def load_names():
+    names = []
+    for i in os.listdir():
+        if i.startswith('daily'):
+            names.append('./{}'.format(i))
+    return sorted(names)
+
+
 class PopupWindow(TabbedPanel):
-    daily = StringProperty('./daily.png')
+    index = NumericProperty(0)
+    daily = StringProperty(load_names()[0])
     weekly = StringProperty('./weekly.png')
     right_b = StringProperty('./Graphics/right.png')
     left_b = StringProperty('./Graphics/left.png')
@@ -29,7 +38,9 @@ class PopupWindow(TabbedPanel):
     analysis = ListProperty(database.daily_analysis)
 
     def go_forward(self):
-        self.switch_to(self.tab_list[0])
+        self.index += 1
+        self.index %= len(load_names())  # this reminder as an index for load_names()[self.index]
+        self.daily = load_names()[self.index]
 
     def go_backward(self):
         self.switch_to(self.tab_list[1])

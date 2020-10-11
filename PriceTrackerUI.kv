@@ -17,9 +17,10 @@
                     pos_hint: {'x': .001, 'center_y': .5}
 
                 Button:
+                    id: forward
                     size_hint: .09, 1
                     pos_hint: {'x': .906,'center_y': .5}
-                    on_release: root.go_forward()
+                    on_press: root.go_forward()
                     AsyncImage:
                         source: root.right_b
                         center_x: self.parent.center_x
