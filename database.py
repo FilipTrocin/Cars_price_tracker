@@ -52,6 +52,7 @@ def query_database():
     reload(calculations)
     calculations.average_day()
     calculations.average_weekly()
+    daily_analysis.clear()
     daily_analysis.extend(calculations.daily_analysis)
     print('Hello Database!: ', user_input, '\n')
 
