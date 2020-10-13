@@ -14,88 +14,57 @@ def delete_graphs():
 delete_graphs()
 
 
-def add_ten(dates, prices):
+def put_some_numbers(values, sep_num):
     """
     Method making 2d lists both for dates as well as prices, where each internal one has 10 elements
-    :param prices: list of all prices to be segregated
-    :param dates: list of all dates to be segregated
+    :param values:
+    :param sep_num: number of dates/prices in an inside list
     :return: 2d lists of dates and prices
     """
-    ten_dates = []
-    ten_prices = []
+    segregated = []
     count = 0
-    temp_d = []
-    temp_p = []
-    for date in dates:
-        if count < 10:
-            temp_d.append(date)
+    temp = []
+    for index in values:
+        if count < sep_num:
+            temp.append(index)
             count += 1
         else:
-            cp = temp_d.copy()
-            ten_dates.append(cp)
-            temp_d.clear()
+            cp = temp.copy()
+            segregated.append(cp)
+            temp.clear()
             count = 0
-        if date is dates[-1]:
+        if index is values[-1]:
             if count == 0:
-                temp_d.append(date)  # TESTING PHASE
+                temp.append(index)  # TESTING PHASE
                 count += 1
-            cp = temp_d.copy()
-            ten_dates.append(cp)
-            temp_d.clear()
+            cp = temp.copy()
+            segregated.append(cp)
+            temp.clear()
 
-    count = 0
-    for price in prices:
-        if count < 10:
-            temp_p.append(price)
-            count += 1
-        else:
-            cp = temp_p.copy()
-            ten_prices.append(cp)
-            temp_p.clear()
-            count = 0
-        if price is prices[-1]:
-            if count == 0:
-                temp_p.append(price)  # TESTING PHASE
-                count += 1
-            cp = temp_p.copy()
-            ten_prices.append(cp)
-            temp_p.clear()
-    return ten_dates, ten_prices
+    return segregated
 
 
-def create_indexes(dates, prices):
+def create_indexes(values, sep_num, initial_k, general_k):
     """
     Method creating unique indexes for every 10 elements
-    :param prices: list of prices
-    :param dates: list of dates
+    :param values:
+    :param sep_num: how many dates/prices be on one index
     :return: lists of keys both for dates and prices
     """
     cnt = 0
     keys_c = 1
-    dates_keys = []
-    for _ in dates:
-        if not dates_keys:
-            dates_keys.append('data0')
-        if cnt == 10:
-            dates_keys.append('data{}'.format(keys_c))
+    keys = []
+    for _ in values:
+        if not keys:
+            keys.append(initial_k)
+        if cnt == sep_num:
+            keys.append(f'{general_k}{keys_c}')
             keys_c += 1
             cnt = 0
         else:
             cnt += 1
 
-    cnt = 0
-    keys_c = 1
-    prices_keys = []
-    for _ in prices:
-        if not prices_keys:
-            prices_keys.append('price0')
-        if cnt == 10:
-            prices_keys.append('price{}'.format(keys_c))
-            keys_c += 1
-            cnt = 0
-        else:
-            cnt += 1
-    return dates_keys, prices_keys
+    return keys
 
 
 def create_dictionaries(dates, prices):
@@ -106,9 +75,14 @@ def create_dictionaries(dates, prices):
     """
     dt_dictionary = dict()
     pr_dictionary = dict()
+
     count = 0
-    dt_lst, pr_lst = add_ten(dates, prices)
-    dt_keys, pr_keys = create_indexes(dates, prices)
+
+    dt_lst = put_some_numbers(dates, 10)
+    pr_lst = put_some_numbers(prices, 10)
+
+    dt_keys = create_indexes(dates, 10, 'data0', 'data')
+    pr_keys = create_indexes(prices, 10, 'price0', 'price')
 
     for key in dt_keys:
         dt_dictionary[key] = dt_lst[count]
