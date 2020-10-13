@@ -47,7 +47,9 @@ def put_some_numbers(values, sep_num):
 def create_indexes(values, sep_num, initial_k, general_k):
     """
     Method creating unique indexes for every 10 elements
-    :param values:
+    :param initial_k: name of the first key
+    :param general_k: general rule naming for the following keys
+    :param values: values to create indexes for
     :param sep_num: how many dates/prices be on one index
     :return: lists of keys both for dates and prices
     """
@@ -78,11 +80,11 @@ def create_dictionaries(dates, prices):
 
     count = 0
 
-    dt_lst = put_some_numbers(dates, 10)
-    pr_lst = put_some_numbers(prices, 10)
+    dt_lst = put_some_numbers(dates, 8)
+    pr_lst = put_some_numbers(prices, 8)
 
-    dt_keys = create_indexes(dates, 10, 'data0', 'data')
-    pr_keys = create_indexes(prices, 10, 'price0', 'price')
+    dt_keys = create_indexes(dates, 8, 'data0', 'data')
+    pr_keys = create_indexes(prices, 8, 'price0', 'price')
 
     for key in dt_keys:
         dt_dictionary[key] = dt_lst[count]
