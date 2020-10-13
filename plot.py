@@ -100,14 +100,14 @@ def create_dictionaries(dates, prices):
 
 def create_namings():
     dictionary = dict()
-    for data in range(len(graph_input()[0])):
+    for data in range(len(graph_input(dates_present, avg_daily_price)[0])):
         name = 'daily{}'.format(data)
         dictionary[name] = StringProperty('./{}.png'.format(name))
     return dictionary
 
 
-def graph_input():
-    dt_dictionary, pr_dictionary = create_dictionaries(dates_present, avg_daily_price)
+def graph_input(dates, prices):
+    dt_dictionary, pr_dictionary = create_dictionaries(dates, prices)
 
     dt_keys = [x for x in dt_dictionary.keys()]
     pr_keys = [x for x in pr_dictionary.keys()]
@@ -126,7 +126,7 @@ def graph_input():
 
 
 def plot_daily_graph():
-    all_dates, all_prices = graph_input()
+    all_dates, all_prices = graph_input(dates_present, avg_daily_price)
 
     num = 0
     for dates in all_dates:
