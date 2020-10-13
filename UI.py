@@ -25,6 +25,8 @@ def load_names():
     for i in os.listdir():
         if i.startswith('daily'):
             names.append('./{}'.format(i))
+    if not names:
+        names.append('./daily0.png')
     return sorted(names)
 
 
