@@ -82,12 +82,12 @@ def average_weekly():
     cal = calendar.Calendar()
     count = 0
     for date in year_month:
-        month = to_dates(cal.monthdayscalendar(date[0], date[1]), date[1], date[0])
+        month = to_dates(cal.monthdayscalendar(date[0], date[1]), date[1], date[0])  # 2D list of weeks in the month
         for week in month:
             temp = '{} - \n{}'.format(week[0], week[-1])
             boundaries.append(temp)
 
-        week_count = []
+        week_count = []  # avg daily prices during weeks
         for x in month:
             temp = []
             for y in x:
