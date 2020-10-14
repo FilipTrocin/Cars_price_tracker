@@ -98,10 +98,10 @@ def create_dictionaries(dates, prices, sep_num):
     return dt_dictionary, pr_dictionary
 
 
-def create_namings(sep_num):
+def create_namings(f_name, sep_num):
     dictionary = dict()
     for data in range(len(graph_input(dates_present, avg_daily_price, sep_num)[0])):
-        name = 'daily{}'.format(data)
+        name = f'{f_name}{data}'
         dictionary[name] = StringProperty('./{}.png'.format(name))
     return dictionary
 
@@ -112,12 +112,12 @@ def graph_input(dates, prices, sep_num):
     dt_keys = [x for x in dt_dictionary.keys()]
     pr_keys = [x for x in pr_dictionary.keys()]
 
-    all_dates = []  # 2D list of lists with 10 dates
+    all_dates = []  # 2D list of lists with dates
     for num in range(len(dt_keys)):
         all_dates.append(dt_dictionary.get(dt_keys[num]))
     # print(all_dates)
 
-    all_prices = []  # 2D list of lists with 10 prices
+    all_prices = []  # 2D list of lists with prices
     for num in range(len(pr_keys)):
         all_prices.append(pr_dictionary.get(pr_keys[num]))
     # print(all_prices)
@@ -137,7 +137,7 @@ def plot_daily_graph():
         ax.yaxis.set_major_formatter(formatter)
 
         plt.bar(all_dates[num], all_prices[num], color="orangered")
-        plt.savefig(list(create_namings(8))[num], bbox_inches='tight')
+        plt.savefig(list(create_namings('daily', 8))[num], bbox_inches='tight')
         plt.show()
         if dates != all_dates[-1]:
             num += 1
