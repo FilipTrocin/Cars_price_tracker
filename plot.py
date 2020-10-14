@@ -17,14 +17,14 @@ delete_graphs()
 def put_some_numbers(values, sep_num):
     """
     Method making 2d lists both for dates as well as prices, where each internal one has 10 elements
-    :param values:
+    :param values: dates or prices
     :param sep_num: number of dates/prices in an inside list
     :return: 2d lists of dates and prices
     """
     segregated = []
     count = 0
     temp = []
-    for index in values:
+    for num, index in enumerate(values):
         if count < sep_num:
             temp.append(index)
             count += 1
@@ -33,9 +33,9 @@ def put_some_numbers(values, sep_num):
             segregated.append(cp)
             temp.clear()
             count = 0
-        if index is values[-1]:
+        if num == len(values) - 1:
             if count == 0:
-                temp.append(index)  # TESTING PHASE
+                temp.append(index)
                 count += 1
             cp = temp.copy()
             segregated.append(cp)
@@ -98,9 +98,9 @@ def create_dictionaries(dates, prices, sep_num):
     return dt_dictionary, pr_dictionary
 
 
-def create_namings(f_name, sep_num):
+def create_namings(dates, prices, f_name, sep_num):
     dictionary = dict()
-    for data in range(len(graph_input(dates_present, avg_daily_price, sep_num)[0])):
+    for data in range(len(graph_input(dates, prices, sep_num)[0])):
         name = f'{f_name}{data}'
         dictionary[name] = StringProperty('./{}.png'.format(name))
     return dictionary
@@ -137,7 +137,7 @@ def plot_daily_graph():
         ax.yaxis.set_major_formatter(formatter)
 
         plt.bar(all_dates[num], all_prices[num], color="orangered")
-        plt.savefig(list(create_namings('daily', 8))[num], bbox_inches='tight')
+        plt.savefig(list(create_namings(dates_present, avg_daily_price, 'daily', 8))[num], bbox_inches='tight')
         plt.show()
         if dates != all_dates[-1]:
             num += 1
@@ -145,7 +145,6 @@ def plot_daily_graph():
 
 def plot_weekly_graph():
     all_dates, all_prices = graph_input(boundaries, avg_weekly_price, 4)
-
     num = 0
     for dates in all_dates:
         plt.style.use('ggplot')
@@ -155,7 +154,7 @@ def plot_weekly_graph():
         ax.yaxis.set_major_formatter(formatter)
 
         plt.bar(all_dates[num], all_prices[num], color="turquoise")
-        plt.savefig(list(create_namings('weekly', 4))[num], bbox_inches='tight')
+        plt.savefig(list(create_namings(boundaries, avg_weekly_price, 'weekly', 4))[num], bbox_inches='tight')
         plt.show()
         if dates != all_dates[-1]:
             num += 1
