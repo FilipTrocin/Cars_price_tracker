@@ -69,7 +69,7 @@ def create_indexes(values, sep_num, initial_k, general_k):
     return keys
 
 
-def create_dictionaries(dates, prices):
+def create_dictionaries(dates, prices, sep_num):
     """
     Method creating a dictionary of keys (products of create_index method) and values
     (products of add_ten_dates method)
@@ -80,11 +80,11 @@ def create_dictionaries(dates, prices):
 
     count = 0
 
-    dt_lst = put_some_numbers(dates, 8)
-    pr_lst = put_some_numbers(prices, 8)
+    dt_lst = put_some_numbers(dates, sep_num)
+    pr_lst = put_some_numbers(prices, sep_num)
 
-    dt_keys = create_indexes(dates, 8, 'data0', 'data')
-    pr_keys = create_indexes(prices, 8, 'price0', 'price')
+    dt_keys = create_indexes(dates, sep_num, 'data0', 'data')
+    pr_keys = create_indexes(prices, sep_num, 'price0', 'price')
 
     for key in dt_keys:
         dt_dictionary[key] = dt_lst[count]
@@ -98,16 +98,16 @@ def create_dictionaries(dates, prices):
     return dt_dictionary, pr_dictionary
 
 
-def create_namings():
+def create_namings(sep_num):
     dictionary = dict()
-    for data in range(len(graph_input(dates_present, avg_daily_price)[0])):
+    for data in range(len(graph_input(dates_present, avg_daily_price, sep_num)[0])):
         name = 'daily{}'.format(data)
         dictionary[name] = StringProperty('./{}.png'.format(name))
     return dictionary
 
 
-def graph_input(dates, prices):
-    dt_dictionary, pr_dictionary = create_dictionaries(dates, prices)
+def graph_input(dates, prices, sep_num):
+    dt_dictionary, pr_dictionary = create_dictionaries(dates, prices, sep_num)
 
     dt_keys = [x for x in dt_dictionary.keys()]
     pr_keys = [x for x in pr_dictionary.keys()]
@@ -126,7 +126,7 @@ def graph_input(dates, prices):
 
 
 def plot_daily_graph():
-    all_dates, all_prices = graph_input(dates_present, avg_daily_price)
+    all_dates, all_prices = graph_input(dates_present, avg_daily_price, 8)
 
     num = 0
     for dates in all_dates:
@@ -137,7 +137,7 @@ def plot_daily_graph():
         ax.yaxis.set_major_formatter(formatter)
 
         plt.bar(all_dates[num], all_prices[num], color="orangered")
-        plt.savefig(list(create_namings())[num], bbox_inches='tight')
+        plt.savefig(list(create_namings(8))[num], bbox_inches='tight')
         plt.show()
         if dates != all_dates[-1]:
             num += 1
