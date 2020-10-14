@@ -7,7 +7,7 @@ from os import listdir, remove, path
 
 def delete_graphs():
     for file in listdir():
-        if file.startswith('daily'):
+        if file.startswith('daily') and file.startswith('weekly'):
             remove(path=path.join(path.dirname(__file__), file))
 
 
@@ -144,12 +144,18 @@ def plot_daily_graph():
 
 
 def plot_weekly_graph():
-    plt.style.use('ggplot')
-    fig, ax = plt.subplots(figsize=(10, 4))
+    all_dates, all_prices = graph_input(boundaries, avg_weekly_price, 4)
 
-    formatter = FormatStrFormatter('%1.2f PLN')
-    ax.yaxis.set_major_formatter(formatter)
+    num = 0
+    for dates in all_dates:
+        plt.style.use('ggplot')
+        fig, ax = plt.subplots(figsize=(10, 4))
 
-    plt.bar(boundaries, avg_weekly_price, color="turquoise")
-    plt.savefig('weekly.png', bbox_inches='tight')
-    plt.show()
+        formatter = FormatStrFormatter('%1.2f PLN')
+        ax.yaxis.set_major_formatter(formatter)
+
+        plt.bar(all_dates[num], all_prices[num], color="turquoise")
+        plt.savefig(list(create_namings('weekly', 4))[num], bbox_inches='tight')
+        plt.show()
+        if dates != all_dates[-1]:
+            num += 1
