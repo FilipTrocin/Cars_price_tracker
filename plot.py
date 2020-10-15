@@ -5,6 +5,8 @@ from kivy.properties import StringProperty
 from os import listdir, remove, path
 
 bar_width = 0.65
+day_bars = 8
+week_bars = 4
 
 
 def delete_graphs():
@@ -128,7 +130,7 @@ def graph_input(dates, prices, sep_num):
 
 
 def plot_daily_graph():
-    all_dates, all_prices = graph_input(dates_present, avg_daily_price, 8)
+    all_dates, all_prices = graph_input(dates_present, avg_daily_price, day_bars)
 
     num = 0
     for dates in all_dates:
@@ -141,14 +143,14 @@ def plot_daily_graph():
         rectangle = ax.bar(all_dates[num], all_prices[num], bar_width, color='darkorange')
         up_label(ax, rectangle)
 
-        plt.savefig(list(create_namings(dates_present, avg_daily_price, 'daily', 8))[num], bbox_inches='tight')
+        plt.savefig(list(create_namings(dates_present, avg_daily_price, 'daily', day_bars))[num], bbox_inches='tight')
         plt.show()
         if dates != all_dates[-1]:
             num += 1
 
 
 def plot_weekly_graph():
-    all_dates, all_prices = graph_input(boundaries, avg_weekly_price, 4)
+    all_dates, all_prices = graph_input(boundaries, avg_weekly_price, week_bars)
 
     num = 0
     for dates in all_dates:
@@ -161,7 +163,7 @@ def plot_weekly_graph():
         rectangle = ax.bar(all_dates[num], all_prices[num], bar_width, color='midnightblue')
         up_label(ax, rectangle)
 
-        plt.savefig(list(create_namings(boundaries, avg_weekly_price, 'weekly', 4))[num], bbox_inches='tight')
+        plt.savefig(list(create_namings(boundaries, avg_weekly_price, 'weekly', week_bars))[num], bbox_inches='tight')
         plt.show()
         if dates != all_dates[-1]:
             num += 1
