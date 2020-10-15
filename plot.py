@@ -4,6 +4,8 @@ from matplotlib.ticker import FormatStrFormatter
 from kivy.properties import StringProperty
 from os import listdir, remove, path
 
+bar_width = 0.65
+
 
 def delete_graphs():
     for file in listdir():
@@ -136,7 +138,9 @@ def plot_daily_graph():
         formatter = FormatStrFormatter('%1.2f PLN')
         ax.yaxis.set_major_formatter(formatter)
 
-        plt.bar(all_dates[num], all_prices[num], color="orangered")
+        rectangle = ax.bar(all_dates[num], all_prices[num], bar_width, color='darkorange')
+        up_label(ax, rectangle)
+
         plt.savefig(list(create_namings(dates_present, avg_daily_price, 'daily', 8))[num], bbox_inches='tight')
         plt.show()
         if dates != all_dates[-1]:
@@ -145,6 +149,7 @@ def plot_daily_graph():
 
 def plot_weekly_graph():
     all_dates, all_prices = graph_input(boundaries, avg_weekly_price, 4)
+
     num = 0
     for dates in all_dates:
         plt.style.use('ggplot')
@@ -153,8 +158,23 @@ def plot_weekly_graph():
         formatter = FormatStrFormatter('%1.2f PLN')
         ax.yaxis.set_major_formatter(formatter)
 
-        plt.bar(all_dates[num], all_prices[num], color="turquoise")
+        rectangle = ax.bar(all_dates[num], all_prices[num], bar_width, color='midnightblue')
+        up_label(ax, rectangle)
+
         plt.savefig(list(create_namings(boundaries, avg_weekly_price, 'weekly', 4))[num], bbox_inches='tight')
         plt.show()
         if dates != all_dates[-1]:
             num += 1
+
+
+def up_label(axis, rect):
+    """
+    Method placing exact price above each bar
+    :param axis: axis with values to be placed
+    :param rect: bar above which the values be placed
+    :return:
+    """
+    for bar in rect:
+        height = bar.get_height()
+        axis.annotate(f'{height} PLN', xy=(bar.get_x() + bar.get_width() / 2, height),
+                      xytext=(0, 1), textcoords='offset points', ha='center', va='bottom')
