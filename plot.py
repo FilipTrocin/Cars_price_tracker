@@ -11,7 +11,7 @@ week_bars = 4
 
 def delete_graphs():
     for file in listdir():
-        if file.startswith('daily') and file.startswith('weekly'):
+        if file.startswith('daily') or file.startswith('weekly'):
             remove(path=path.join(path.dirname(__file__), file))
 
 
