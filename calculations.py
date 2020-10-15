@@ -49,10 +49,11 @@ def average_day():
             break
         try:
             avg = sum(x) / len(x)
-            avg_daily_price.append(avg)
-            print(f'• On {dates_present[count]} car with that specification cost on average {round(avg, 2)}PLN '
+            rounded = round(avg, 2)
+            avg_daily_price.append(rounded)
+            print(f'• On {dates_present[count]} car with that specification cost on average {rounded}PLN '
                   f'({len(x)} car/s in that day)')
-            daily_analysis.append(f'• On {dates_present[count]} car with that specification cost on average {round(avg, 2)}PLN '
+            daily_analysis.append(f'• On {dates_present[count]} car with that specification cost on average {rounded}PLN '
                                   f'==> {len(x)} car/s in that day\n')
             count += 1
         except ZeroDivisionError:
