@@ -39,7 +39,10 @@ def add_to_database():
     if searched_today() is True:
         print('Search for this car model was already done today')
     else:
-        establish_connection().insert_many(create_entry_receiver())
+        try:
+            establish_connection().insert_many(create_entry_receiver())
+        except TypeError:
+            print('Car like this does not exist!')
 
 
 def query_database():
