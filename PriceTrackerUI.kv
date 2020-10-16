@@ -13,20 +13,30 @@
                     id: day
                     source: root.daily
                     nocache: True
+                    keep_ratio: False
                     allow_stretch: True
-                    size_hint: .9, 1
-                    pos_hint: {'x': .001, 'center_y': .5}
+                    size_hint: .8, 1
+                    pos_hint: {'x': .1, 'center_y': .5}
 
                 Button:
                     id: forward
                     size_hint: .09, 1
                     pos_hint: {'x': .906,'center_y': .5}
-                    on_press: root.go_forward()
+                    on_press: root.go_forward_d()
                     Image:
                         source: root.right_b
                         center_x: self.parent.center_x
                         center_y: self.parent.center_y
 
+                Button:
+                    id: backward
+                    size_hint: .09, 1
+                    pos_hint: {'x': .0039,'center_y': .5}
+                    on_press: root.go_backward_d()
+                    Image:
+                        source: root.left_b
+                        center_x: self.parent.center_x
+                        center_y: self.parent.center_y
 
             FloatLayout:
                 size_hint: 1, .25
@@ -48,22 +58,33 @@
             orientation: 'vertical'
             spacing: 25
             FloatLayout:
-                Button:
-                    size_hint: .09, 1
-                    pos_hint: {'x': .005,'center_y': .5}
-                    on_release: root.go_backward()
-                    Image:
-                        source: root.left_b
-                        center_x: self.parent.center_x
-                        center_y: self.parent.center_y
 
                 AsyncImage:
                     id: week
                     source: root.weekly
                     nocache: True
+                    keep_ratio: False
                     allow_stretch: True
-                    size_hint: .9, 1
-                    pos_hint: {'x': .0827, 'center_y': .5}
+                    size_hint: .8, 1
+                    pos_hint: {'x': .1, 'center_y': .5}
+
+                Button:
+                    size_hint: .09, 1
+                    pos_hint: {'x': .0039,'center_y': .5}
+                    on_press: root.go_backward_w()
+                    Image:
+                        source: root.left_b
+                        center_x: self.parent.center_x
+                        center_y: self.parent.center_y
+
+                Button:
+                    size_hint: .09, 1
+                    pos_hint: {'x': .906,'center_y': .5}
+                    on_press: root.go_forward_w()
+                    Image:
+                        source: root.right_b
+                        center_x: self.parent.center_x
+                        center_y: self.parent.center_y
 
             FloatLayout:
                 size_hint: 1, .25
