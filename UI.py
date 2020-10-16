@@ -20,32 +20,58 @@ LabelBase.register('AmericanTypewriter', fn_regular=os.path.join(os.path.dirname
 user_input = []
 
 
-def load_names():
+def load_names(starts_with):
+    """
+    method browsing for specified .png files
+    :param starts_with: beginning of the name of desirable .png file
+    :return: sorted list of .png files
+    """
     names = []
     for i in os.listdir():
-        if i.startswith('daily'):
+        if i.startswith(starts_with):
             names.append('./{}'.format(i))
     if not names:
-        names.append('./daily0.png')
+        names.append(f'./{starts_with}0.png')
     return sorted(names)
 
 
 class PopupWindow(TabbedPanel):
-    index = NumericProperty(0)
-    daily = StringProperty(load_names()[0])
-    weekly = StringProperty('./weekly.png')
+    week = NumericProperty(0)
+    day = NumericProperty(0)
+    daily = StringProperty(load_names('daily')[0])
+    weekly = StringProperty(load_names('weekly')[0])
     right_b = StringProperty('./Graphics/right.png')
     left_b = StringProperty('./Graphics/left.png')
 
     analysis = ListProperty(database.daily_analysis)
 
-    def go_forward(self):
-        self.index += 1
-        self.index %= len(load_names())  # this reminder as an index for load_names()[self.index]
-        self.daily = load_names()[self.index]
+    def go_forward_d(self):
+        if self.day < len(load_names('daily')) - 1:
+            self.day += 1
+        if self.day == len(load_names('daily')) - 1:
+            self.day = len(load_names('daily')) - 1
+        self.daily = load_names('daily')[self.day]
 
-    def go_backward(self):
-        self.switch_to(self.tab_list[1])
+    def go_backward_d(self):
+        if self.day > 0:
+            self.day -= 1
+        if self.day == 0:
+            self.day = 0
+        self.daily = load_names('daily')[self.day]
+
+    def go_forward_w(self):
+        if self.week < len(load_names('weekly')) - 1:
+            self.week += 1
+        if self.week == len(load_names('weekly')) - 1:
+            self.week = len(load_names('weekly')) - 1
+        self.weekly = load_names('weekly')[self.week]
+
+    def go_backward_w(self):
+        if self.week > 0:
+            self.week -= 1
+        if self.week == 0:
+            self.week = 0
+        self.weekly = load_names('weekly')[self.week]
 
 
 def popup_show():
