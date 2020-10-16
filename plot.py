@@ -5,7 +5,7 @@ from kivy.properties import StringProperty
 from os import listdir, remove, path
 
 bar_width = 0.65
-day_bars = 8
+day_bars = 7
 week_bars = 4
 
 
