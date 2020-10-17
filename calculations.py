@@ -84,21 +84,23 @@ def average_weekly():
     count = 0
     for date in year_month:
         month = to_dates(cal.monthdayscalendar(date[0], date[1]), date[1], date[0])  # 2D list of weeks in the month
-        for week in month:
-            temp = '{} - \n{}'.format(week[0], week[-1])
-            boundaries.append(temp)
 
-        week_count = []  # avg daily prices during weeks
-        for x in month:
+        week_prices = []  # avg daily prices during weeks
+        for week in month:
             temp = []
-            for y in x:
-                if y in dates_present:
+            for day in week:
+                if day in dates_present:
                     temp.append(avg_daily_price[count])
                     count += 1
-            week_count.append(temp)
-        # print('Prices of that car put in weeks : {}'.format(week_count))   # TESTING PURPOSES
+            if not temp:
+                pass
+            else:
+                week_prices.append(temp)
+                two_dates = '{} - \n{}'.format(week[0], week[-1])
+                boundaries.append(two_dates)
+        # print('Prices of that car put in weeks : {}'.format(week_prices))   # TESTING PURPOSES
 
-        for week in week_count:
+        for week in week_prices:
             temp = []
             for car in week:
                 temp.append(car)
