@@ -1,10 +1,13 @@
 from database import establish_connection, show_unique_dates
+from datetime import datetime
 from UI import user_input
 import calendar
 
 connection = establish_connection()
 
 dates = connection.distinct('SEARCHES')
+daily_prices = []  # Sorted avg_daily_price in the order of dates_sorted
+days_sorted = []  # Sorted dates_present from the most recent
 dates_present = []  # dates in which car with that specification is present in database
 boundaries = []  # First and last day from a week
 avg_daily_price = []  # Average from prices during a day
@@ -22,44 +25,60 @@ def average_day():
     on the website on that day
     :return:
     """
-    daily_prices = []  # Prices of all the cars with concrete user's specification, present in database
+    prices = []  # Prices of all the cars with concrete user's specification, present in database
     # List of all cars matching user's criteria and existing in a database in concrete dates the algorithm was running
-    for x, y in enumerate(dates):
+    for z, y in enumerate(dates):
         cars.extend(connection.find(
             {"MAKE": user_input[0], "MODEL": user_input[1], "YEAR": int(user_input[2]), "ENGINE_TYPE": user_input[3],
-             "SEARCHES": dates[x]}))
+             "SEARCHES": dates[z]}))
 
     for date in cars:
         if date['SEARCHES'] not in dates_present:
             dates_present.append(date['SEARCHES'])
 
-    for x in dates:
+    for date in dates:
         temp = []
         for y in cars:
-            if y['SEARCHES'] == x:
+            if y['SEARCHES'] == date:
                 temp.append(y['PRICE'])
                 # print('DAY: ', x, 'PRICE: ', y['PRICE'])
-        daily_prices.append(temp)
-    # print(daily_prices, '\n')
+        prices.append(temp)
+
     count = 0
-    for x in daily_prices:
-        condition = [item for items in daily_prices for item in items]
+    for price in prices:
+        condition = [item for items in prices for item in items]
         if not condition:
             print('We do not have such a car in our database')
             break
         try:
-            avg = sum(x) / len(x)
+            avg = sum(price) / len(price)
             rounded = round(avg, 2)
             avg_daily_price.append(rounded)
             print(f'• On {dates_present[count]} car with that specification cost on average {rounded}PLN '
-                  f'({len(x)} car/s in that day)')
+                  f'({len(price)} car/s in that day)')
             daily_analysis.append(f'• On {dates_present[count]} car with that specification cost on average {rounded}PLN '
-                                  f'==> {len(x)} car/s in that day\n')
+                                  f'==> {len(price)} car/s in that day\n')
             count += 1
         except ZeroDivisionError:
             pass
+
+    nums = [num for num in range(len(dates_present))]
+    dates_indexed = dict(zip(dates_present, nums))
+    prices_indexed = dict(zip(nums, avg_daily_price))
+
+    sort = sorted(dates_indexed.keys(), key=lambda x: datetime.strptime(x, '%Y-%m-%d'), reverse=True)
+    days_sorted.extend(sort)
+
+    indexed = []
+    for date in sort:
+        temp = [dates_indexed[date], date]
+        indexed.append(temp)
+
+    for index in indexed:
+        daily_prices.append(prices_indexed[index[0]])
+
     try:
-        flatten = [item for items in daily_prices for item in items]
+        flatten = [item for items in prices for item in items]
         overall_avg = sum(flatten) / len(flatten)
         print(
             f"Based on all data you gathered, car like this costs on average: {round(overall_avg, 2)}PLN")
