@@ -37,6 +37,9 @@ def put_some_numbers(values, sep_num):
             segregated.append(cp)
             temp.clear()
             count = 0
+        if num % sep_num == 0 and num != 0:
+            temp.append(index)
+            count += 1
         if num == len(values) - 1:
             if count == 0:
                 temp.append(index)
