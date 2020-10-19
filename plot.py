@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from calculations import days_sorted, boundaries, daily_prices, avg_weekly_price
+from calculations import days_sorted, dt_range, daily_prices, weekly_prices
 from matplotlib.ticker import FormatStrFormatter
 from kivy.properties import StringProperty
 from os import listdir, remove, path
@@ -153,7 +153,7 @@ def plot_daily_graph():
 
 
 def plot_weekly_graph():
-    all_dates, all_prices = graph_input(boundaries, avg_weekly_price, week_bars)
+    all_dates, all_prices = graph_input(dt_range, weekly_prices, week_bars)
 
     num = 0
     for dates in all_dates:
@@ -166,7 +166,7 @@ def plot_weekly_graph():
         rectangle = ax.bar(all_dates[num], all_prices[num], bar_width, color='midnightblue')
         up_label(ax, rectangle)
 
-        plt.savefig(list(create_namings(boundaries, avg_weekly_price, 'weekly', week_bars))[num], bbox_inches='tight')
+        plt.savefig(list(create_namings(dt_range, weekly_prices, 'weekly', week_bars))[num], bbox_inches='tight')
         plt.show()
         if dates != all_dates[-1]:
             num += 1

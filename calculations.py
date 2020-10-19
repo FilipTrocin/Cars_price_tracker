@@ -9,9 +9,9 @@ dates = connection.distinct('SEARCHES')
 daily_prices = []  # Sorted avg_daily_price in the order of dates_sorted
 days_sorted = []  # Sorted dates_present from the most recent
 dates_present = []  # dates in which car with that specification is present in database
-boundaries = []  # First and last day from a week
 avg_daily_price = []  # Average from prices during a day
-avg_weekly_price = []  # Average from prices during a week
+dt_range = []  # First and last day of given week
+weekly_prices = []  # Avg of daily prices from each week
 year_month = []  # date in [[year, month]] format, where pair of year and month is unique
 cars = []  # Findings based of user input
 
@@ -83,6 +83,8 @@ def average_weekly():
     """
     all_dates = []  # Similar to show_unique_dates but without day
     temp_sort = []  # Temporary list feeding first parameter of `sortation` method
+    avg_weekly_price = []  # Average from prices during a week
+    two_dates = []  # First and last day from a week
     for date in show_unique_dates():
         temp = [date[0], date[1]]
         all_dates.append(temp)
@@ -108,8 +110,7 @@ def average_weekly():
             else:
                 week_prices.append(temp)
                 temp_sort.append(week[-1])
-                two_dates = '{} - \n{}'.format(week[0], week[-1])
-                boundaries.append(two_dates)
+                two_dates.append('{} - \n{}'.format(week[0], week[-1]))
         # print('Prices of that car put in weeks : {}'.format(week_prices))   # TESTING PURPOSES
 
         for week in week_prices:
@@ -125,9 +126,14 @@ def average_weekly():
                 avg_weekly_price.append(0)
 
     weeks, prices_w = sortation(temp_sort, avg_weekly_price)
-    # print('WEEKS: ', weeks)
-    # print("PRICES: ", prices_w)
-    # print('BOUNDARIES: ', boundaries)
+    weekly_prices.extend(prices_w)
+
+# swapping sorted week[-1] values by two_dates values in descending order
+    for x in weeks:
+        for y in two_dates:
+            if y.endswith(x):
+                x = y
+                dt_range.append(x)
 
 
 def sortation(dates, prices):
