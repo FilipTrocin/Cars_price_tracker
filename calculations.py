@@ -26,7 +26,7 @@ def average_day():
     :return:
     """
     prices = []  # Prices of all the cars with concrete user's specification, present in database
-    # List of all cars matching user's criteria and existing in a database in concrete dates the algorithm was running
+
     for z, y in enumerate(dates):
         cars.extend(connection.find(
             {"MAKE": user_input[0], "MODEL": user_input[1], "YEAR": int(user_input[2]), "ENGINE_TYPE": user_input[3],
@@ -62,20 +62,10 @@ def average_day():
         except ZeroDivisionError:
             pass
 
-    nums = [num for num in range(len(dates_present))]
-    dates_indexed = dict(zip(dates_present, nums))
-    prices_indexed = dict(zip(nums, avg_daily_price))
+    days, prices_d = sortation(dates_present, avg_daily_price)
+    days_sorted.extend(days)
+    daily_prices.extend(prices_d)
 
-    sort = sorted(dates_indexed.keys(), key=lambda x: datetime.strptime(x, '%Y-%m-%d'), reverse=True)
-    days_sorted.extend(sort)
-
-    indexed = []
-    for date in sort:
-        temp = [dates_indexed[date], date]
-        indexed.append(temp)
-
-    for index in indexed:
-        daily_prices.append(prices_indexed[index[0]])
 
     try:
         flatten = [item for items in prices for item in items]
@@ -92,6 +82,7 @@ def average_weekly():
     :return:
     """
     all_dates = []  # Similar to show_unique_dates but without day
+    temp_sort = []  # Temporary list feeding first parameter of `sortation` method
     for date in show_unique_dates():
         temp = [date[0], date[1]]
         all_dates.append(temp)
@@ -99,8 +90,9 @@ def average_weekly():
         if x not in year_month:
             year_month.append(x)
 
+    dt_to_price = dict(zip(dates_present, avg_daily_price))
+
     cal = calendar.Calendar()
-    count = 0
     for date in year_month:
         month = to_dates(cal.monthdayscalendar(date[0], date[1]), date[1], date[0])  # 2D list of weeks in the month
 
@@ -109,12 +101,13 @@ def average_weekly():
             temp = []
             for day in week:
                 if day in dates_present:
-                    temp.append(avg_daily_price[count])
-                    count += 1
+                    indexed = dt_to_price[day]
+                    temp.append(indexed)
             if not temp:
                 pass
             else:
                 week_prices.append(temp)
+                temp_sort.append(week[-1])
                 two_dates = '{} - \n{}'.format(week[0], week[-1])
                 boundaries.append(two_dates)
         # print('Prices of that car put in weeks : {}'.format(week_prices))   # TESTING PURPOSES
@@ -130,7 +123,30 @@ def average_weekly():
                 avg_weekly_price.append(rounded)
             except ZeroDivisionError:
                 avg_weekly_price.append(0)
-        # print('This is weekly price: ', avg_weekly_price)  # TESTING PURPOSES
+
+    weeks, prices_w = sortation(temp_sort, avg_weekly_price)
+    # print('WEEKS: ', weeks)
+    # print("PRICES: ", prices_w)
+    # print('BOUNDARIES: ', boundaries)
+
+
+def sortation(dates, prices):
+    nums = [num for num in range(len(dates))]
+    dates_indexed = dict(zip(dates, nums))
+    prices_indexed = dict(zip(nums, prices))
+
+    dates_sorted = sorted(dates_indexed.keys(), key=lambda x: datetime.strptime(x, '%Y-%m-%d'), reverse=True)
+
+    indexed = []
+    for date in dates_sorted:
+        temp = [dates_indexed[date], date]
+        indexed.append(temp)
+
+    prices_d = []
+    for index in indexed:
+        prices_d.append(prices_indexed[index[0]])
+
+    return dates_sorted, prices_d
 
 
 def to_dates(calendar, month, year):
