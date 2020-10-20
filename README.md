@@ -1,4 +1,4 @@
-##OTOMOTO.PL price tracker
+## OTOMOTO.PL price tracker
 
 A python program with an user interface created based on kivy language, that looks for an user specified car on Polish
 otomoto.pl website considering parameters like **make**, **model**, **year** and **engine type**, perform various 
