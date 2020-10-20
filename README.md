@@ -13,6 +13,8 @@ Simply run main.py and subsequently provide car you are interested in by filling
 Note, algorithm loads results of given car make and model from the first search page only.
 Loading from remaining search pages may be added in the next versions of the program.
 
+The program was created for demonstration purposes and so my MongoDB hosting credentials were removed. You can still use that program with your own local database and gather data by running search for a car you are interested in, whenever you want.
+
 Algorithm works with a version of otomoto.pl website on a day 19/10/2020. This may change, if the website's layout be
 modified
 
