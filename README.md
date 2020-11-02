@@ -1,11 +1,10 @@
-## OTOMOTO.PL price tracker
-
+## Overview:
 A python program with an user interface created based on kivy language, that looks for an user specified car on Polish
 otomoto.pl website considering parameters like **make**, **model**, **year** and **engine type**, perform various 
 calculations on those cars data and plot 2 kinds of graphs (average of daily prices on a weekly perspective, and average
 of weekly prices on a monthly perspective)
 
-## Instructions
+## Instructions:
 Simply run main.py and subsequently provide car you are interested in by filling 4 fields (i.e. **make**, **model**, 
 **year** and **engine type**(diesel/benyzna/benzyna+lpg which stands for diesel/benzine/benzine+lpg))
 
