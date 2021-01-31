@@ -7,6 +7,14 @@ of weekly prices on a monthly perspective)
 ## Instructions:
 Simply run main.py and subsequently provide car you are interested in by filling 4 fields (i.e. **make**, **model**, 
 **year** and **engine type**(diesel/benyzna/benzyna+lpg which stands for diesel/benzine/benzine+lpg))
+![alt text](https://github.com/FilipTrocin/Cars_price_tracker/blob/master/images/if1.png?raw=true)
+
+The program will display you the results in two views:  
+  
+**Daily View**
+![alt text](https://github.com/FilipTrocin/Cars_price_tracker/blob/master/images/if2.png?raw=true)
+**Weekly View**
+![alt text](https://github.com/FilipTrocin/Cars_price_tracker/blob/master/images/if3.png?raw=true)
 
 ## Quick note:
 Note, algorithm loads results of given car make and model from the first search page only.
